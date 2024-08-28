@@ -1,0 +1,22 @@
+.header-container {
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--rec-border);
+}
+
+.header-title {
+    color: var(--rec-text-color-5);
+}
+
+.header-link {
+    width: 25px;
+    height: 25px;
+}
+
+.header-link .icon {
+    color: white;
+    width: 25px;
+    height: 25px;
+}

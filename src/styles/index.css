@@ -1,0 +1,20 @@
+:root {
+  font-family: "Urbanist", sans-serif;
+  --rec-background: #141414;
+  --rec-skeleton-background: #2e2d2d;
+  --rec-skeleton-loader: rgba(108, 108, 108, 0.2);
+  --rec-text-color-5: #FFFFFF;
+  --rec-text-color-4: #dfdfdf;
+  --rec-highlight: #57C4DC;
+  --rec-border: rgb(56, 55, 55);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+.main {
+  min-height: 100vh;
+  background-color: var(--rec-background);
+}

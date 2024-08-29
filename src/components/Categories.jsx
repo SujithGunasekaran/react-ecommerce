@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { BiCategory } from "react-icons/bi";
@@ -7,8 +7,10 @@ import { getArrayWithNLength } from '../utils/loaderUtils';
 import { addCategory } from '../store/slice/categorySlice';
 import axios from 'axios';
 import CategoryItem from './CategoryItem';
-import LineLoader from '../skeletonLoader/Line';
+import SkeletonLoader from '../skeletonLoader/SkeletonLoader';
 import '../styles/category.css';
+
+const InlineMessage = lazy(() => import('./InlineMessage'));
 
 const Categories = () => {
 
@@ -61,12 +63,20 @@ const Categories = () => {
             </div>
             <div className='category-content'>
                 {
+                    hasError &&
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <InlineMessage
+                            type='error'
+                            message='Error while fetching the categories'
+                        />
+                    </Suspense>
+                }
+                {
                     isLoading &&
                     getArrayWithNLength(categoryLoaderLength).map((_, index) => (
                         <div key={index} className='category-item-loader'>
-                            <LineLoader
-                                width='100%'
-                                height='25px'
+                            <SkeletonLoader
+                                className='loader'
                             />
                         </div>
                     ))
@@ -77,8 +87,8 @@ const Categories = () => {
                         <CategoryItem
                             key={category.slug}
                             name={category.slug}
-                            activeItem={activeCategory === category.slug}
                             displayName={category.name}
+                            isActiveItem={activeCategory === category.slug}
                         />
                     ))
                 }

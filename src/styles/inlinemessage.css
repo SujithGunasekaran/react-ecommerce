@@ -1,0 +1,12 @@
+.inline-message-container {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 6px;
+}
+
+.inline-message-container.error {
+    border: 2px solid var(--rec-danger-border);
+    background-color: var(--rec-danger-background);
+    color: var(--rec-danger-color);
+}

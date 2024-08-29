@@ -1,7 +1,7 @@
 .category-container {
     border-radius: 7px;
-    padding: 25px 10px;
-    min-height: 100vh;
+    padding: 25px 15px 25px 0px;
+    min-height: 100%;
     border-right: 1px solid var(--rec-border);
 }
 
@@ -43,6 +43,11 @@
 .category-item-loader {
     width: 100%;
     padding: 10px 0px;
+}
+
+.category-item-loader .loader {
+    height: 25px;
+    border-radius: 6px;
 }
 
 .category-item.active {

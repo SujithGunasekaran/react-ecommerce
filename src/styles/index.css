@@ -3,15 +3,26 @@
   --rec-background: #141414;
   --rec-skeleton-background: #2e2d2d;
   --rec-skeleton-loader: rgba(108, 108, 108, 0.2);
+  --rec-text-dark-2: rgb(153 153 153);
   --rec-text-color-5: #FFFFFF;
   --rec-text-color-4: #dfdfdf;
   --rec-highlight: #57C4DC;
-  --rec-border: rgb(56, 55, 55);
+  --rec-highlight-2: #4097ab;
+  --rec-border: rgb(44, 43, 43);
+
+  --rec-danger-color: #842029;
+  --rec-danger-background: #f8d7da;
+  --rec-danger-border: #f5c2c7;
 }
 
 * {
   box-sizing: border-box;
   margin: 0px;
+}
+
+.img-fallback {
+  width: 0px;
+  height: 0px;
 }
 
 .main {

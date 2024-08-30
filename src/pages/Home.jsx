@@ -42,7 +42,17 @@ const Home = () => {
         }
     }
 
-    const handleScroll = () => {
+    const trottle = (callback, delay) => {
+        let last = 0;
+        return () => {
+            let now = new Date().getTime();
+            if ((now - last) < delay) return;
+            last = now;
+            callback();
+        }
+    }
+
+    const handleScroll = trottle(() => {
         const windowHeight = window.innerHeight;
         const scrollPosition = window.scrollY;
         const totalHeight = document.body.scrollHeight;
@@ -51,10 +61,10 @@ const Home = () => {
 
         if (isLoading) return;
 
-        if (totalHeight - 200 < offset && hasMore) {
+        if (totalHeight - 500 < offset && hasMore) {
             fetchProduct();
         }
-    }
+    }, 100)
 
     useEffect(() => {
         fetchProduct();

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Categories from '../components/Categories';
 import ProductList from '../components/ProductList';
 import { baseUrl, productLimit } from '../constants';
+import { trottle } from '../utils/commonUtils';
 import '../styles/home.css';
 
 const InlineMessage = lazy(() => import('../components/InlineMessage'));
@@ -39,16 +40,6 @@ const Home = () => {
             setHasError(true);
         } finally {
             setIsLoading(false);
-        }
-    }
-
-    const trottle = (callback, delay) => {
-        let last = 0;
-        return () => {
-            let now = new Date().getTime();
-            if ((now - last) < delay) return;
-            last = now;
-            callback();
         }
     }
 

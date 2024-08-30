@@ -1,6 +1,7 @@
 :root {
   font-family: "Urbanist", sans-serif;
   --rec-background: #141414;
+  --rec-background-2: rgba(74, 73, 73, 0.2);
   --rec-skeleton-background: #2e2d2d;
   --rec-skeleton-loader: rgba(108, 108, 108, 0.2);
   --rec-text-dark-2: rgb(153 153 153);
@@ -28,4 +29,23 @@
 .main {
   min-height: 100vh;
   background-color: var(--rec-background);
+}
+
+.go-back-wrapper {
+  display: inline-flex;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px 8px;
+  width: 90px;
+  border-radius: 50px;
+  border: 1px solid var(--rec-border);
+  text-decoration: none;
+  color: var(--rec-text-color-5);
+  background-color: var(--rec-background-2);
+  align-items: center;
+  transition: 0.4s all ease-in-out;
+}
+
+.go-back-wrapper:hover {
+  color: var(--rec-highlight);
 }

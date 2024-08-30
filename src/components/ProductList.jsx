@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import propTypes from 'prop-types';
-import ProductCardLoader from '../skeletonLoader/ProductCardLoader';
+import ProductCardLoader from '../Loaders/ProductCardLoader';
 import { getArrayWithNLength } from '../utils/loaderUtils';
 import '../styles/product.css';
 
@@ -9,7 +9,7 @@ const ProductItem = lazy(() => import('./ProductItem'));
 const ProductList = (props) => {
 
     // props
-    const { productList, showSkeleton } = props;
+    const { productList, showSkeleton, skeletonLoaderLength = 8 } = props;
 
     return (
         <div className='product-container'>
@@ -26,7 +26,7 @@ const ProductList = (props) => {
             </Suspense>
             {
                 showSkeleton &&
-                getArrayWithNLength(8).map((_, index) => (
+                getArrayWithNLength(skeletonLoaderLength).map((_, index) => (
                     <ProductCardLoader key={index} />
                 ))
             }
@@ -36,7 +36,8 @@ const ProductList = (props) => {
 
 ProductList.propTypes = {
     productList: propTypes.array,
-    showSkeleton: propTypes.bool
+    showSkeleton: propTypes.bool,
+    skeletonLoaderLength: propTypes.number
 };
 
 export default ProductList;

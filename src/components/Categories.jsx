@@ -7,7 +7,7 @@ import { getArrayWithNLength } from '../utils/loaderUtils';
 import { addCategory } from '../store/slice/categorySlice';
 import axios from 'axios';
 import CategoryItem from './CategoryItem';
-import SkeletonLoader from '../skeletonLoader/SkeletonLoader';
+import SkeletonLoader from '../Loaders/SkeletonLoader';
 import '../styles/category.css';
 
 const InlineMessage = lazy(() => import('./InlineMessage'));

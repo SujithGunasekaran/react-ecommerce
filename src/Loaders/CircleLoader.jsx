@@ -1,11 +1,15 @@
+import propsTypes from 'prop-types';
 
-
-const CircleLoader = () => {
+const CircleLoader = ({ className }) => {
     return (
         <div className='circle-loader-container'>
-            <div className='circle-loader'></div>
+            <div className={`circle-loader ${className}`}></div>
         </div>
     )
+}
+
+CircleLoader.propTypes = {
+    className: propsTypes.string
 }
 
 export default CircleLoader;

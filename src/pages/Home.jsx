@@ -6,6 +6,7 @@ import { baseUrl, productLimit } from '../constants';
 import { trottle } from '../utils/commonUtils';
 import '../styles/home.css';
 
+const ProductSearchInput = lazy(() => import('../components/ProductSearchInput'));
 const InlineMessage = lazy(() => import('../components/InlineMessage'));
 
 const Home = () => {
@@ -77,6 +78,9 @@ const Home = () => {
                     <Categories />
                 </div>
                 <div className='home-product-container'>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ProductSearchInput />
+                    </Suspense>
                     {
                         hasError &&
                         <Suspense fallback={<div>Loading...</div>}>

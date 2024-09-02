@@ -21,7 +21,7 @@ const ProductItem = (props) => {
                     />
                 </div>
                 <div className='product-card-content'>
-                    <p className='title'>{product.title}</p>
+                    <h2 className='title'>{product.title}</h2>
                     <p className='description'>{product.description}</p>
                     <span className='category'>{product.category}</span>
                 </div>

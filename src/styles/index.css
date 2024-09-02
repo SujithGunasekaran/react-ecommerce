@@ -2,6 +2,7 @@
   font-family: "Urbanist", sans-serif;
   --rec-background: #141414;
   --rec-background-2: rgba(74, 73, 73, 0.2);
+  --rec-background-3: rgb(90, 89, 89);
   --rec-skeleton-background: #2e2d2d;
   --rec-skeleton-loader: rgba(108, 108, 108, 0.2);
   --rec-text-dark-2: rgb(153 153 153);

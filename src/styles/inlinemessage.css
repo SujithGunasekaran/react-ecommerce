@@ -4,6 +4,7 @@
     font-size: 14px;
     font-weight: 500;
     border-radius: 6px;
+    margin: 15px 0px;
 }
 
 .inline-message-container.error {

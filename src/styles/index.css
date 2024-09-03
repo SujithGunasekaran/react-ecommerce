@@ -1,16 +1,17 @@
 :root {
-  font-family: "Urbanist", sans-serif;
-  --rec-background: #141414;
+  font-family: "Open Sans", sans-serif;
+  --rec-background: #222222;
   --rec-background-2: rgba(74, 73, 73, 0.2);
   --rec-background-3: rgb(90, 89, 89);
   --rec-skeleton-background: #2e2d2d;
   --rec-skeleton-loader: rgba(108, 108, 108, 0.2);
+  --rec-text-dark-1: #222222;
   --rec-text-dark-2: rgb(153 153 153);
   --rec-text-color-5: #FFFFFF;
   --rec-text-color-4: #dfdfdf;
-  --rec-highlight: #57C4DC;
-  --rec-highlight-2: #4097ab;
-  --rec-border: rgb(44, 43, 43);
+  --rec-highlight: rgb(109, 237, 212);
+  --rec-highlight-2: rgb(84, 193, 171);
+  --rec-border: rgb(53, 52, 52);
 
   --rec-danger-color: #842029;
   --rec-danger-background: #f8d7da;

@@ -135,7 +135,7 @@
     align-items: center;
     font-size: 14px;
     font-weight: 600;
-    color: var(--rec-text-color-5);
+    color: var(--rec-text-dark-1);
     background-color: var(--rec-highlight-2);
 }
 

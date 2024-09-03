@@ -1,27 +1,33 @@
-import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CircleLoader from '../Loaders/CircleLoader';
-import LazyImage from './LazyImage';
 import { FaSearch } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import { baseUrl } from '../constants';
 import axios from 'axios';
 import '../styles/search.css';
 
+const SearchResultItem = lazy(() => import('./SearchResultItem'));
+
 const ProductSearchInput = () => {
+
+    // navigate
+    const navigate = useNavigate();
 
     // state
     const [searchQuery, setSearchQuery] = useState('');
     const [searchedProducts, setSearchProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [activeList, setActiveList] = useState(-1);
+
+    // ref
+    const abortController = useRef(null);
+    const listRef = useRef(null);
 
     const handleSearchQuery = (event) => {
         const { value } = event.target;
         setSearchQuery(value);
     }
-
-    // ref
-    const abortController = useRef(null);
 
     const searchProduct = async () => {
         try {
@@ -43,6 +49,32 @@ const ProductSearchInput = () => {
         }
     }
 
+    const handleKeyDown = (event) => {
+        const { key } = event;
+        if (searchedProducts.length === 0) return;
+        if (key === 'Enter') {
+            event.preventDefault();
+            const { id } = searchedProducts[activeList];
+            navigate(`/product/${id}`);
+        } else if (key === 'ArrowUp') {
+            event.preventDefault();
+            setActiveList((prevState) => {
+                return prevState > 0 ? prevState - 1 : prevState;
+            });
+        } else if (key === 'ArrowDown') {
+            event.preventDefault();
+            setActiveList((prevState) => {
+                return prevState < searchedProducts.length - 1 ? prevState + 1 : prevState;
+            });
+        }
+    }
+
+    const scrollToItem = () => {
+        if (listRef.current && listRef.current.children.length > 0) {
+            listRef.current.children[activeList].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
     const cancelApi = () => {
         if (abortController.current) {
             abortController.current.abort();
@@ -53,6 +85,7 @@ const ProductSearchInput = () => {
     const resetData = () => {
         setSearchQuery('');
         setSearchProducts([]);
+        listRef.current = null;
     }
 
     useEffect(() => {
@@ -73,8 +106,8 @@ const ProductSearchInput = () => {
     }, [searchQuery])
 
     useEffect(() => {
-        return () => resetData();
-    }, [])
+        scrollToItem();
+    }, [activeList])
 
     return (
         <div className='search-wrapper'>
@@ -87,6 +120,8 @@ const ProductSearchInput = () => {
                     className='search-input'
                     placeholder='Search products...'
                     onChange={handleSearchQuery}
+                    onKeyDown={handleKeyDown}
+                    onBlur={resetData}
                 />
                 {
                     isLoading &&
@@ -107,23 +142,21 @@ const ProductSearchInput = () => {
             </div>
             {
                 searchedProducts.length > 0 &&
-                <div className='search-dropdown-container'>
-                    {
-                        searchedProducts.map((product, index) => (
-                            <Link
-                                to={`/product/${product.id}`}
-                                className={`search-dropdown-item ${index > 0 && 'border'}`}
-                                key={product.id}
-                            >
-                                <LazyImage
-                                    className='thumbnail'
-                                    src={product.thumbnail}
-                                    alt={product.title}
+                <div className='search-dropdown-container' ref={listRef}>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        {
+                            searchedProducts.map((product, index) => (
+                                <SearchResultItem
+                                    key={product.id}
+                                    index={index}
+                                    productId={product.id}
+                                    thumbnail={product.thumbnail}
+                                    title={product.title}
+                                    isActive={activeList === index}
                                 />
-                                <p className='title'>{product.title}</p>
-                            </Link>
-                        ))
-                    }
+                            ))
+                        }
+                    </Suspense>
                 </div>
             }
         </div>

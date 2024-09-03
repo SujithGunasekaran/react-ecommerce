@@ -5,10 +5,10 @@
 
 .search-input-wrapper {
     width: 100%;
-    height: 45px;
+    height: 50px;
+    padding: 0px 5px;
     border: 1px solid var(--rec-border);
-    background-color: var(--rec-background-2);
-    border-radius: 6px;
+    border-radius: 50px;
     display: flex;
     align-items: center;
 }
@@ -17,12 +17,17 @@
     height: 45px;
     width: 100%;
     flex: 1;
-    border: 1.5px solid var(--rec-background-2);
+    border: 1.5px solid var(--rec-background-1);
     border-radius: 6px;
-    padding: 0px 6px;
-    font-size: 15px;
+    padding: 0px 10px 0px 15px;
+    font-size: 17px;
     color: var(--rec-color-5);
-    background-color: var(--rec-background-2);
+    background-color: var(--rec-background-1);
+}
+
+.search-input-wrapper .search-input::placeholder {
+    font-weight: 500;
+    font-size: 17px;
 }
 
 .search-input-wrapper .search-input:focus {
@@ -35,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--rec-background-2);
+    background-color: var(--rec-background-1);
 }
 
 .search-circle-loader {
@@ -53,7 +58,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--rec-background-2);
+    background-color: var(--rec-background-1);
 }
 
 .search-input-wrapper .search-cancel:hover .icon {
@@ -67,12 +72,12 @@
 }
 
 .search-input-wrapper .search-icon {
-    width: 50px;
-    height: 45px;
+    width: 35px;
+    border-radius: 50px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0px 6px 6px 0px;
     background-color: var(--rec-highlight-2);
 }
 
@@ -99,6 +104,10 @@
     color: var(--rec-color-5);
 }
 
+.search-dropdown-item.active {
+    border: 1px solid var(--rec-highlight) !important;
+}
+
 .search-dropdown-item:hover .title {
     color: var(--rec-highlight);
 }
@@ -121,4 +130,8 @@
     font-size: 14px;
     font-weight: 600;
     transition: 0.3s all ease-in-out;
+}
+
+.search-dropdown-item.active .title {
+    color: var(--rec-highlight);
 }

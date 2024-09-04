@@ -4,7 +4,7 @@ import ProductCardLoader from '../Loaders/ProductCardLoader';
 import { getArrayWithNLength } from '../utils/loaderUtils';
 import '../styles/product.css';
 
-const ProductItem = lazy(() => import('./ProductItem'));
+const ProductCardItem = lazy(() => import('./ProductCardItem'));
 
 const ProductList = (props) => {
 
@@ -12,12 +12,12 @@ const ProductList = (props) => {
     const { productList, showSkeleton, skeletonLoaderLength = 8 } = props;
 
     return (
-        <div className='product-container'>
+        <div className='product-list-container'>
             <Suspense fallback={<div>Loading...</div>}>
                 {
                     productList.length > 0 &&
                     productList.map((product) => (
-                        <ProductItem
+                        <ProductCardItem
                             key={product.id}
                             product={product}
                         />

@@ -9,9 +9,9 @@ const InlineMessage = (props) => {
     } = props;
 
     return (
-        <div className={`inline-message-container ${type}`}>
+        <p className={`inline-message-container ${type}`}>
             {message}
-        </div>
+        </p>
     )
 }
 

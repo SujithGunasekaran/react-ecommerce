@@ -71,7 +71,7 @@ const ProductSearchInput = () => {
 
     const scrollToItem = () => {
         if (listRef.current && listRef.current.children.length > 0) {
-            listRef.current.children[activeList].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            listRef.current.children[activeList]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }
 
@@ -85,6 +85,7 @@ const ProductSearchInput = () => {
     const resetData = () => {
         setSearchQuery('');
         setSearchProducts([]);
+        setActiveList(-1);
         listRef.current = null;
     }
 
@@ -107,6 +108,7 @@ const ProductSearchInput = () => {
 
     useEffect(() => {
         scrollToItem();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeList])
 
     return (

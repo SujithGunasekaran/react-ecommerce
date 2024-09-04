@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import propTypes from 'prop-types';
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -9,6 +10,13 @@ const ProductItem = (props) => {
     const {
         product,
     } = props;
+
+    const price = useMemo(() => {
+        return product?.price ? new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(product.price) : 0;
+    }, [product])
 
     return (
         <>
@@ -29,7 +37,7 @@ const ProductItem = (props) => {
                     <div className='product-card-footer-price'>
                         <p className='title'>Price</p>
                         <p className='price'>
-                            ${product.price}
+                            {price}
                             <span className='discount'>
                                 {`${product.discountPercentage}% off`}
                             </span>

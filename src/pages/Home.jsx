@@ -1,7 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import axios from 'axios';
 import Categories from '../components/Categories';
-import ProductList from '../components/ProductList';
+import ProductCardList from '../components/ProductCardList';
 import { baseUrl, productLimit } from '../constants';
 import { trottle } from '../utils/commonUtils';
 import '../styles/home.css';
@@ -90,7 +90,7 @@ const Home = () => {
                             />
                         </Suspense>
                     }
-                    <ProductList
+                    <ProductCardList
                         productList={productList}
                         showSkeleton={isLoading}
                         skeletonLoaderLength={12}

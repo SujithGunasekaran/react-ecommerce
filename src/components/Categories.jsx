@@ -51,6 +51,7 @@ const Categories = () => {
         if (categories.length === 0) {
             fetchCategories();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -59,7 +60,7 @@ const Categories = () => {
                 <div className='icon-wrapper'>
                     <BiCategory className='icon' />
                 </div>
-                <div className='title'>Categories</div>
+                <h2 className='title'>Categories</h2>
             </div>
             <div className='category-content'>
                 {

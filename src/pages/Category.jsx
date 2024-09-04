@@ -5,7 +5,7 @@ import axios from 'axios';
 import { updateCategoryProduct } from '../store/slice/categorySlice';
 import { baseUrl } from '../constants';
 import Categories from '../components/Categories';
-import ProductList from '../components/ProductList';
+import ProductCardList from '../components/ProductCardList';
 import GoBackLink from '../components/GoBackLink';
 import '../styles/home.css';
 
@@ -70,7 +70,7 @@ const Category = () => {
                             />
                         </Suspense>
                     }
-                    <ProductList
+                    <ProductCardList
                         showSkeleton={isLoading}
                         productList={categoryProduct?.[categoryName] ?? []}
                         skeletonLoaderLength={12}

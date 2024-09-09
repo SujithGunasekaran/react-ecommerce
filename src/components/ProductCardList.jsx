@@ -6,14 +6,24 @@ import '../styles/product.css';
 
 const ProductCardItem = lazy(() => import('./ProductCardItem'));
 
+
 const ProductList = (props) => {
 
     // props
     const { productList, showSkeleton, skeletonLoaderLength = 8 } = props;
 
+
+    const SkeletonProductList = () => {
+        return (
+            getArrayWithNLength(skeletonLoaderLength).map((_, index) => (
+                <ProductCardLoader key={index} />
+            ))
+        )
+    }
+
     return (
         <div className='product-list-container'>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={SkeletonProductList()}>
                 {
                     productList.length > 0 &&
                     productList.map((product) => (
@@ -26,9 +36,7 @@ const ProductList = (props) => {
             </Suspense>
             {
                 showSkeleton &&
-                getArrayWithNLength(skeletonLoaderLength).map((_, index) => (
-                    <ProductCardLoader key={index} />
-                ))
+                SkeletonProductList()
             }
         </div>
     )

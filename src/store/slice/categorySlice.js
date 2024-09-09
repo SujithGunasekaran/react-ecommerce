@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getBrandNames, getRatings } from '../../utils/categoryUtils';
 
 const initialState = {
     categories: [],
@@ -15,9 +16,27 @@ const categorySlice = createSlice({
         updateCategoryProduct: (state, action) => {
             const { payload } = action;
             const { selectedCategory, products } = payload;
+            const brand = getBrandNames(products);
+            const ratings = getRatings();
             state.categoryProduct = {
                 ...state.categoryProduct,
-                [selectedCategory]: products
+                [selectedCategory]: {
+                    products,
+                    productFilters: [
+                        {
+                            name: 'brand',
+                            displayName: 'Brand',
+                            filters: brand,
+                            type: 'checkbox',
+                        },
+                        {
+                            name: 'rating',
+                            displayName: 'Ratings',
+                            filters: ratings,
+                            type: 'checkbox',
+                        }
+                    ]
+                }
             }
         }
     }

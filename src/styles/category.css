@@ -2,7 +2,6 @@
     border-radius: 7px;
     padding: 25px 15px 25px 0px;
     min-height: 100%;
-    border-right: 1px solid var(--rec-border);
 }
 
 .category-header {

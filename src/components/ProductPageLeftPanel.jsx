@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import LazyImage from './LazyImage';
 import propTypes from 'prop-types';
 
 const ProductPageLeftPanel = (props) => {
@@ -21,13 +22,21 @@ const ProductPageLeftPanel = (props) => {
                             onClick={() => handleImageChange(index)}
                             className={`product-page-image-item ${activeImage === index && 'active'}`}
                         >
-                            <img className='image' src={image} alt={`${title}-${index}`} />
+                            <LazyImage
+                                className='image'
+                                src={image}
+                                alt={`${title}-${index}`}
+                            />
                         </div>
                     ))
                 }
             </div>
             <div className='product-page-main-image'>
-                <img className='image' src={images[activeImage]} alt={`${title}-image`} />
+                <LazyImage
+                    className='image'
+                    src={images[activeImage]}
+                    alt={`${title}-image`}
+                />
             </div>
         </Fragment>
 

@@ -9,10 +9,10 @@ import './styles/loader.css';
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
-  <main className='main'>
+  <div className='main'>
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </main>
+  </div>
   // </StrictMode>,
 );

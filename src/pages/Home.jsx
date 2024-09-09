@@ -1,6 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import axios from 'axios';
 import Categories from '../components/Categories';
+import SearchBarLoader from '../Loaders/SearchBarLoader';
 import ProductCardList from '../components/ProductCardList';
 import { baseUrl, productLimit } from '../constants';
 import { trottle } from '../utils/commonUtils';
@@ -73,12 +74,12 @@ const Home = () => {
 
     return (
         <>
-            <div className='home-container'>
-                <div className='home-category-container'>
+            <main className='home-container'>
+                <aside className='home-category-container'>
                     <Categories />
-                </div>
-                <div className='home-product-container'>
-                    <Suspense fallback={<div>Loading...</div>}>
+                </aside>
+                <section className='home-product-container'>
+                    <Suspense fallback={<SearchBarLoader />}>
                         <ProductSearchInput />
                     </Suspense>
                     {
@@ -95,8 +96,8 @@ const Home = () => {
                         showSkeleton={isLoading}
                         skeletonLoaderLength={12}
                     />
-                </div>
-            </div>
+                </section>
+            </main>
         </>
     )
 }

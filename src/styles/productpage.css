@@ -34,6 +34,9 @@
     height: 85px;
     border-radius: 10px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     border: 1px solid var(--rec-border);
 }
@@ -43,8 +46,8 @@
 }
 
 .product-page-image-item .image {
-    width: 85px;
-    height: 85px;
+    width: 75px;
+    height: 75px;
 }
 
 .product-page-image-item .image-loader {

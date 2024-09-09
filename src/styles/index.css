@@ -21,6 +21,7 @@
 * {
   box-sizing: border-box;
   margin: 0px;
+  background-color: var(--rec-background);
 }
 
 .img-fallback {
@@ -30,7 +31,6 @@
 
 .main {
   min-height: 100vh;
-  background-color: var(--rec-background);
 }
 
 .go-back-wrapper {
@@ -50,4 +50,12 @@
 
 .go-back-wrapper:hover {
   color: var(--rec-highlight);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { updateCategoryProduct } from '../store/slice/categorySlice';
 import { baseUrl } from '../constants';
+import ProductFilters from '../components/ProductFilters.jsx';
 import Categories from '../components/Categories';
 import ProductCardList from '../components/ProductCardList';
 import GoBackLink from '../components/GoBackLink';
@@ -52,11 +53,14 @@ const Category = () => {
 
     return (
         <>
-            <div className='home-container'>
-                <div className='home-category-container'>
+            <main className='home-container'>
+                <section className='home-category-container'>
+                    <ProductFilters
+                        productFilters={categoryProduct?.[categoryName]?.productFilters ?? []}
+                    />
                     <Categories />
-                </div>
-                <div className='home-product-container'>
+                </section>
+                <section className='home-product-container'>
                     <GoBackLink
                         to={'/'}
                         text={'Home'}
@@ -72,11 +76,11 @@ const Category = () => {
                     }
                     <ProductCardList
                         showSkeleton={isLoading}
-                        productList={categoryProduct?.[categoryName] ?? []}
+                        productList={categoryProduct?.[categoryName]?.products ?? []}
                         skeletonLoaderLength={12}
                     />
-                </div>
-            </div>
+                </section>
+            </main>
         </>
     )
 }

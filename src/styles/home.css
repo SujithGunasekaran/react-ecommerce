@@ -4,12 +4,15 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 1600px;
+    min-height: 100vh;
     margin: 0px auto;
     color: white;
 }
 
 .home-category-container {
     width: 240px;
+    height: 100%;
+    border-right: 1px solid var(--rec-border);
 }
 
 .home-product-container {

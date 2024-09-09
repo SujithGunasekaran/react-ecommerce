@@ -55,7 +55,7 @@ const Categories = () => {
     }, []);
 
     return (
-        <div className='category-container'>
+        <section className='category-container'>
             <div className='category-header'>
                 <div className='icon-wrapper'>
                     <BiCategory className='icon' />
@@ -94,7 +94,7 @@ const Categories = () => {
                     ))
                 }
             </div>
-        </div>
+        </section>
     )
 }
 

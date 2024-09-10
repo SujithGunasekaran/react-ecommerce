@@ -1,51 +1,29 @@
-import { lazy, Suspense } from 'react';
 import propTypes from 'prop-types';
-import ProductCardLoader from '../Loaders/ProductCardLoader';
-import { getArrayWithNLength } from '../utils/loaderUtils';
-import '../styles/product.css';
-
-const ProductCardItem = lazy(() => import('./ProductCardItem'));
+import ProductCardItem from './ProductCardItem';
 
 
-const ProductList = (props) => {
+const ProductCardList = (props) => {
 
     // props
-    const { productList, showSkeleton, skeletonLoaderLength = 8 } = props;
-
-
-    const SkeletonProductList = () => {
-        return (
-            getArrayWithNLength(skeletonLoaderLength).map((_, index) => (
-                <ProductCardLoader key={index} />
-            ))
-        )
-    }
+    const { productList } = props;
 
     return (
         <div className='product-list-container'>
-            <Suspense fallback={SkeletonProductList()}>
-                {
-                    productList.length > 0 &&
-                    productList.map((product) => (
-                        <ProductCardItem
-                            key={product.id}
-                            product={product}
-                        />
-                    ))
-                }
-            </Suspense>
             {
-                showSkeleton &&
-                SkeletonProductList()
+                productList.length > 0 &&
+                productList.map((product) => (
+                    <ProductCardItem
+                        key={product.id}
+                        product={product}
+                    />
+                ))
             }
         </div>
     )
 }
 
-ProductList.propTypes = {
+ProductCardList.propTypes = {
     productList: propTypes.array,
-    showSkeleton: propTypes.bool,
-    skeletonLoaderLength: propTypes.number
 };
 
-export default ProductList;
+export default ProductCardList;

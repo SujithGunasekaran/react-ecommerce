@@ -148,3 +148,9 @@
 .product-card-footer-rating .icon {
     margin-top: 2px;
 }
+
+.empty-product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

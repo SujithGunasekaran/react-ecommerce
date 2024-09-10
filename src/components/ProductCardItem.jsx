@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import LazyImage from './LazyImage';
 
-const ProductItem = (props) => {
+const ProductCardItem = (props) => {
 
     // props
     const {
@@ -53,8 +53,8 @@ const ProductItem = (props) => {
     )
 }
 
-ProductItem.propTypes = {
+ProductCardItem.propTypes = {
     product: propTypes.object,
 }
 
-export default ProductItem;
+export default ProductCardItem;

@@ -1,11 +1,14 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import axios from 'axios';
+import { getArrayWithNLength } from '../utils/loaderUtils.js';
+import ProductCardLoader from '../Loaders/ProductCardLoader.jsx';
 import Categories from '../components/Categories';
 import SearchBarLoader from '../Loaders/SearchBarLoader';
 import ProductCardList from '../components/ProductCardList';
 import { baseUrl, productLimit } from '../constants';
 import { trottle } from '../utils/commonUtils';
 import '../styles/home.css';
+import '../styles/product.css';
 
 const ProductSearchInput = lazy(() => import('../components/ProductSearchInput'));
 const InlineMessage = lazy(() => import('../components/InlineMessage'));
@@ -91,11 +94,22 @@ const Home = () => {
                             />
                         </Suspense>
                     }
-                    <ProductCardList
-                        productList={productList}
-                        showSkeleton={isLoading}
-                        skeletonLoaderLength={12}
-                    />
+                    {
+                        productList.length > 0 &&
+                        <ProductCardList
+                            productList={productList}
+                        />
+                    }
+                    {
+                        isLoading &&
+                        <div className='product-list-container'>
+                            {
+                                getArrayWithNLength(12).map((_, index) => (
+                                    <ProductCardLoader key={index} />
+                                ))
+                            }
+                        </div>
+                    }
                 </section>
             </main>
         </>

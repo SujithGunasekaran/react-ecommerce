@@ -4,8 +4,11 @@ const CheckboxFilter = (props) => {
 
     // props
     const {
+        filterKey,
         filterTitle,
-        checkboxList
+        checkboxList,
+        selectedFilter,
+        onCheckboxChange,
     } = props;
 
     return (
@@ -15,19 +18,24 @@ const CheckboxFilter = (props) => {
                 {
                     checkboxList.map((checkbox) => (
                         <div
-                            key={checkbox}
+                            key={checkbox.name}
                             className='product-filter-content-item'
                         >
-                            <div className='product-filter-input-wrapper'>
-                                <input
-                                    type='checkbox'
-                                    id={checkbox.name}
-                                    name={checkbox.name}
-                                    value={checkbox.name}
-                                    className='product-filter-checkbox'
-                                />
-                            </div>
-                            <label className='product-filter-label'>{checkbox.displayName}</label>
+                            <input
+                                type='checkbox'
+                                id={checkbox.name}
+                                name={checkbox.name}
+                                value={checkbox.name}
+                                checked={selectedFilter[filterKey]?.includes(checkbox.name)}
+                                onChange={() => onCheckboxChange(filterKey, checkbox.name)}
+                                className='product-filter-checkbox'
+                            />
+                            <label
+                                htmlFor={checkbox.name}
+                                className='product-filter-label'
+                            >
+                                {checkbox.displayName}
+                            </label>
                         </div>
                     ))
                 }
@@ -37,8 +45,11 @@ const CheckboxFilter = (props) => {
 }
 
 CheckboxFilter.propTypes = {
+    filterKey: propTypes.string,
     filterTitle: propTypes.string,
     checkboxList: propTypes.array,
+    selectedFilter: propTypes.object,
+    onCheckboxChange: propTypes.func,
 }
 
 export default CheckboxFilter;

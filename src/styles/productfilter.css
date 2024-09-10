@@ -1,5 +1,5 @@
 .product-filter-wrapper {
-    padding: 25px 15px 25px 0px;
+    padding: 25px 15px 0px 0px;
 }
 
 .product-filter-container {
@@ -11,14 +11,25 @@
     font-weight: 500;
 }
 
+.product-filter-header-title.loader {
+    border-radius: 6px;
+    height: 30px;
+}
+
 .product-filter-content {
     padding: 10px 0px;
 }
 
 .product-filter-content-item {
     display: flex;
-    padding: 5px 0px;
+    padding: 8px 0px;
     align-items: center;
+}
+
+.product-filter-content-item.loader {
+    border-radius: 6px;
+    margin: 10px 0px;
+    height: 25px;
 }
 
 .product-filter-input-wrapper {
@@ -32,10 +43,12 @@
 .product-filter-checkbox {
     width: 15px;
     height: 15px;
+    cursor: pointer;
     accent-color: var(--rec-highlight);
 }
 
 .product-filter-label {
+    margin-left: 10px;
     font-size: 15px;
     color: var(--rec-text-color-4);
 }

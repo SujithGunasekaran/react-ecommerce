@@ -18,7 +18,7 @@ const GoBackLink = (props) => {
 
 GoBackLink.propTypes = {
     text: propTypes.string,
-    to: propTypes.string | propTypes.number
+    to: propTypes.any
 };
 
 export default GoBackLink;

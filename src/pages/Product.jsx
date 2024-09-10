@@ -69,23 +69,6 @@ const Product = () => {
     }, [productId])
 
 
-    if (hasError) {
-        return (
-            <Suspense fallback={<div>Loading...</div>}>
-                <InlineMessage
-                    type={'error'}
-                    message={'Failed to load the product info'}
-                />
-            </Suspense>
-        );
-    }
-
-    if (isLoading) {
-        return (
-            <ProductPageLoader />
-        )
-    }
-
     if (!productInfo && !isLoading && !hasError) {
         return <div></div>
     }
@@ -96,73 +79,88 @@ const Product = () => {
                 to={'/'}
                 text={'Home'}
             />
-            <div className='product-page-info-wrapper'>
-                <div className='product-page-image-container'>
-                    <ProductPageLeftPanel
-                        title={productInfo.title}
-                        images={productInfo.images}
-                        thumbnail={productInfo.thumbnail}
-                        activeImage={activeImage}
-                        handleImageChange={handleImageChange}
+            {
+                isLoading && <ProductPageLoader />
+            }
+            {
+                hasError &&
+                <Suspense fallback={<div>Loading...</div>}>
+                    <InlineMessage
+                        type={'error'}
+                        message={'Failed to load the product info'}
                     />
-                </div>
-                <div className='product-page-content-container'>
-                    <div className='product-page-content-wrapper'>
-                        <h1 className='product-page-content-title'>{productInfo.title}</h1>
-                        <div className='product-page-sub-header-wrapper'>
-                            <div className='sub-header-item'>
-                                {productInfo.rating}
-                                <span className='icon'><FaStar /></span>
+                </Suspense>
+            }
+            {
+                productInfo &&
+                <div className='product-page-info-wrapper'>
+                    <div className='product-page-image-container'>
+                        <ProductPageLeftPanel
+                            title={productInfo.title}
+                            images={productInfo.images}
+                            thumbnail={productInfo.thumbnail}
+                            activeImage={activeImage}
+                            handleImageChange={handleImageChange}
+                        />
+                    </div>
+                    <div className='product-page-content-container'>
+                        <div className='product-page-content-wrapper'>
+                            <h1 className='product-page-content-title'>{productInfo.title}</h1>
+                            <div className='product-page-sub-header-wrapper'>
+                                <div className='sub-header-item'>
+                                    {productInfo.rating}
+                                    <span className='icon'><FaStar /></span>
+                                </div>
+                                <div className='sub-header-item'>
+                                    {productInfo.stock > 0 ? 'In-Stock' : 'Out-Of-Stock'}
+                                </div>
                             </div>
-                            <div className='sub-header-item'>
-                                {productInfo.stock > 0 ? 'In-Stock' : 'Out-Of-Stock'}
+                            <p className='product-page-content-description'>{productInfo.description}</p>
+                            <div className='product-page-price-wrapper'>
+                                <p className='title'>Price</p>
+                                <h2 className='value'>
+                                    {price}
+                                    <span className='discount'>{productInfo.discountPercentage}%</span>
+                                </h2>
                             </div>
-                        </div>
-                        <p className='product-page-content-description'>{productInfo.description}</p>
-                        <div className='product-page-price-wrapper'>
-                            <p className='title'>Price</p>
-                            <h2 className='value'>
-                                {price}
-                                <span className='discount'>{productInfo.discountPercentage}%</span>
-                            </h2>
-                        </div>
-                        <div className='product-page-price-wrapper'>
-                            <p className='title'>Brand</p>
-                            <h2 className='value'>
-                                {productInfo.brand}
-                            </h2>
-                        </div>
-                        <div className='product-page-tag-wrapper'>
-                            <p className='title'>Tags</p>
-                            <div className='tag-wrapper'>
-                                {
-                                    productInfo.tags.map((tag) => (
-                                        <div key={tag} className='tag'>{tag}</div>
-                                    ))
-                                }
+                            <div className='product-page-price-wrapper'>
+                                <p className='title'>Brand</p>
+                                <h2 className='value'>
+                                    {productInfo.brand}
+                                </h2>
                             </div>
-                        </div>
-                        <div className='product-page-quantity-wrapper'>
-                            <div className='icon' onClick={descreaseQuantity}>
-                                <FaMinus />
+                            <div className='product-page-tag-wrapper'>
+                                <p className='title'>Tags</p>
+                                <div className='tag-wrapper'>
+                                    {
+                                        productInfo.tags.map((tag) => (
+                                            <div key={tag} className='tag'>{tag}</div>
+                                        ))
+                                    }
+                                </div>
                             </div>
-                            <input
-                                type='number'
-                                name='quantity'
-                                value={productQuantity}
-                                max={50}
-                                min={1}
-                                className='input'
-                                onChange={handleProductQuantity}
-                            />
-                            <div className='icon' onClick={increaseQuantity}>
-                                <FaPlus />
+                            <div className='product-page-quantity-wrapper'>
+                                <div className='icon' onClick={descreaseQuantity}>
+                                    <FaMinus />
+                                </div>
+                                <input
+                                    type='number'
+                                    name='quantity'
+                                    value={productQuantity}
+                                    max={50}
+                                    min={1}
+                                    className='input'
+                                    onChange={handleProductQuantity}
+                                />
+                                <div className='icon' onClick={increaseQuantity}>
+                                    <FaPlus />
+                                </div>
                             </div>
+                            <button className='product-page-add-to-cart'>Add to Cart</button>
                         </div>
-                        <button className='product-page-add-to-cart'>Add to Cart</button>
                     </div>
                 </div>
-            </div>
+            }
         </div>
     )
 }

@@ -1,14 +1,19 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState, useMemo, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { updateCategoryProduct } from '../store/slice/categorySlice';
 import { baseUrl } from '../constants';
+import { filterProductList } from '../utils/categoryUtils.js';
+import { getArrayWithNLength } from '../utils/loaderUtils.js';
+import ProductFilterLoader from '../Loaders/ProductFilterLoader.jsx';
+import ProductCardLoader from '../Loaders/ProductCardLoader.jsx';
 import ProductFilters from '../components/ProductFilters.jsx';
 import Categories from '../components/Categories';
 import ProductCardList from '../components/ProductCardList';
 import GoBackLink from '../components/GoBackLink';
 import '../styles/home.css';
+import '../styles/product.css';
 
 const InlineMessage = lazy(() => import('../components/InlineMessage'));
 
@@ -17,6 +22,7 @@ const Category = () => {
     // state
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
+    const [selectedFilters, setSelectedFilters] = useState({});
 
     // params
     const { categoryName = null } = useParams();
@@ -43,6 +49,28 @@ const Category = () => {
         }
     }
 
+    const selectFilters = (filterName, filterValue) => {
+        let modifiedFilters = { ...selectedFilters };
+        if (modifiedFilters[filterName]) {
+            if (modifiedFilters[filterName].includes(filterValue)) {
+                modifiedFilters[filterName] = modifiedFilters[filterName].filter((name) => name !== filterValue);
+            } else {
+                modifiedFilters[filterName].push(filterValue);
+            }
+        } else {
+            modifiedFilters[filterName] = [filterValue];
+        }
+        setSelectedFilters(modifiedFilters);
+    }
+
+    const categoryProductList = useMemo(() => {
+        if (!categoryProduct?.[categoryName]?.products) return [];
+        let products = categoryProduct[categoryName].products;
+        let filteredList = filterProductList(selectedFilters, products);
+        products = Object.keys(selectedFilters).length > 0 ? filteredList : products;
+        return products;
+    }, [categoryProduct, selectedFilters, categoryName])
+
     useEffect(() => {
         if (!categoryName) return;
         if (!categoryProduct[categoryName]) {
@@ -55,9 +83,22 @@ const Category = () => {
         <>
             <main className='home-container'>
                 <section className='home-category-container'>
-                    <ProductFilters
-                        productFilters={categoryProduct?.[categoryName]?.productFilters ?? []}
-                    />
+                    <div className='product-filter-wrapper'>
+                        {
+                            categoryProduct?.[categoryName]?.productFilters.length > 0 &&
+                            <ProductFilters
+                                selectedFilter={selectedFilters}
+                                productFilters={categoryProduct[categoryName].productFilters}
+                                onCheckboxChange={selectFilters}
+                            />
+                        }
+                        {
+                            isLoading &&
+                            getArrayWithNLength(2).map((_, index) => (
+                                <ProductFilterLoader key={index} />
+                            ))
+                        }
+                    </div>
                     <Categories />
                 </section>
                 <section className='home-product-container'>
@@ -74,11 +115,28 @@ const Category = () => {
                             />
                         </Suspense>
                     }
-                    <ProductCardList
-                        showSkeleton={isLoading}
-                        productList={categoryProduct?.[categoryName]?.products ?? []}
-                        skeletonLoaderLength={12}
-                    />
+                    {
+                        (!isLoading && !hasError) &&
+                        categoryProductList.length === 0 &&
+                        <div className='empty-product'>No Product Found</div>
+                    }
+                    {
+                        categoryProductList.length > 0 &&
+                        <ProductCardList
+                            productList={categoryProductList}
+                        />
+                    }
+                    {
+                        isLoading &&
+                        <div className='product-list-container'>
+                            {
+                                getArrayWithNLength(12).map((_, index) => (
+                                    <ProductCardLoader key={index} />
+                                ))
+                            }
+                        </div>
+
+                    }
                 </section>
             </main>
         </>

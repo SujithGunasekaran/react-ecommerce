@@ -7,32 +7,39 @@ const ProductFilters = (props) => {
 
     // props
     const {
-        productFilters
+        selectedFilter,
+        productFilters,
+        onCheckboxChange,
     } = props;
 
     return (
-        <div className='product-filter-wrapper'>
+        <>
             {
                 productFilters.length > 0 &&
                 productFilters.map((filter) => (
-                    <Fragment key={filter.key}>
+                    <Fragment key={filter.name}>
                         {
                             filter.type === 'checkbox' &&
                             filter.filters.length > 0 &&
                             <CheckboxFilter
+                                selectedFilter={selectedFilter}
+                                filterKey={filter.name}
                                 filterTitle={filter.displayName}
                                 checkboxList={filter.filters}
+                                onCheckboxChange={onCheckboxChange}
                             />
                         }
                     </Fragment>
                 ))
             }
-        </div>
+        </>
     )
 }
 
 ProductFilters.propTypes = {
+    selectedFilter: propTypes.object,
     productFilters: propTypes.array,
+    onCheckboxChange: propTypes.func,
 };
 
 export default ProductFilters;

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import propTypes from 'prop-types';
-import { fallImage } from '../constants';
+import { fallbackImage } from '../constants';
 
 const LazyImage = (props) => {
 
@@ -35,7 +35,7 @@ const LazyImage = (props) => {
     return (
         <img
             className={inView ? className : 'img-fallback'}
-            src={inView ? src : fallImage}
+            src={inView ? src : fallbackImage}
             alt={alt}
             ref={inputRef}
             loading='lazy'

@@ -7,8 +7,6 @@ import SearchBarLoader from '../Loaders/SearchBarLoader';
 import ProductCardList from '../components/ProductCardList';
 import { baseUrl, productLimit } from '../constants';
 import { trottle } from '../utils/commonUtils';
-import '../styles/home.css';
-import '../styles/product.css';
 
 const ProductSearchInput = lazy(() => import('../components/ProductSearchInput'));
 const InlineMessage = lazy(() => import('../components/InlineMessage'));

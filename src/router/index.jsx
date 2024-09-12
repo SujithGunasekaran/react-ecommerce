@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import HomePageLoader from '../Loaders/HomePageLoader';
 import HeaderLayout from '../layouts/HeaderLayout';
 import { createBrowserRouter } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: (
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<HomePageLoader />}>
                         <Home />
                     </Suspense>
                 )
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:categoryName',
                 element: (
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<HomePageLoader />}>
                         <Category />
                     </Suspense>
                 )

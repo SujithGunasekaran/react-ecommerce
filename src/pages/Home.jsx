@@ -1,15 +1,17 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getArrayWithNLength } from '../utils/loaderUtils.js';
 import ProductCardLoader from '../Loaders/ProductCardLoader.jsx';
+import ProductSearchInput from '../components/ProductSearchInput';
 import Categories from '../components/Categories';
-import SearchBarLoader from '../Loaders/SearchBarLoader';
 import ProductCardList from '../components/ProductCardList';
+import InlineMessage from '../components/InlineMessage';
 import { baseUrl, productLimit } from '../constants';
 import { trottle } from '../utils/commonUtils';
+import '../styles/home.css';
+import '../styles/category.css';
+import '../styles/product.css';
 
-const ProductSearchInput = lazy(() => import('../components/ProductSearchInput'));
-const InlineMessage = lazy(() => import('../components/InlineMessage'));
 
 const Home = () => {
 
@@ -80,17 +82,13 @@ const Home = () => {
                     <Categories />
                 </aside>
                 <section className='home-product-container'>
-                    <Suspense fallback={<SearchBarLoader />}>
-                        <ProductSearchInput />
-                    </Suspense>
+                    <ProductSearchInput />
                     {
                         hasError &&
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <InlineMessage
-                                type={'error'}
-                                message={'Failed to load the products'}
-                            />
-                        </Suspense>
+                        <InlineMessage
+                            type={'error'}
+                            message={'Failed to load the products'}
+                        />
                     }
                     {
                         productList.length > 0 &&

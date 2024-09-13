@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, lazy, Suspense } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -12,10 +12,11 @@ import ProductFilters from '../components/ProductFilters.jsx';
 import Categories from '../components/Categories';
 import ProductCardList from '../components/ProductCardList';
 import GoBackLink from '../components/GoBackLink';
+import InlineMessage from '../components/InlineMessage';
 import '../styles/home.css';
+import '../styles/category.css';
 import '../styles/product.css';
 
-const InlineMessage = lazy(() => import('../components/InlineMessage'));
 
 const Category = () => {
 
@@ -108,12 +109,10 @@ const Category = () => {
                     />
                     {
                         hasError &&
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <InlineMessage
-                                type={'error'}
-                                message={'Failed to load the catgeory products'}
-                            />
-                        </Suspense>
+                        <InlineMessage
+                            type={'error'}
+                            message={'Failed to load the catgeory products'}
+                        />
                     }
                     {
                         (!isLoading && !hasError) &&

@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { BiCategory } from "react-icons/bi";
@@ -7,9 +7,9 @@ import { getArrayWithNLength } from '../utils/loaderUtils';
 import { addCategory } from '../store/slice/categorySlice';
 import axios from 'axios';
 import CategoryItem from './CategoryItem';
+import InlineMessage from './InlineMessage';
 import SkeletonLoader from '../Loaders/SkeletonLoader';
 
-const InlineMessage = lazy(() => import('./InlineMessage'));
 
 const Categories = () => {
 
@@ -64,12 +64,10 @@ const Categories = () => {
             <div className='category-content'>
                 {
                     hasError &&
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <InlineMessage
-                            type='error'
-                            message='Error while fetching the categories'
-                        />
-                    </Suspense>
+                    <InlineMessage
+                        type='error'
+                        message='Error while fetching the categories'
+                    />
                 }
                 {
                     isLoading &&

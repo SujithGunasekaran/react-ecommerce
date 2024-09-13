@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense, lazy, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
@@ -6,10 +6,9 @@ import axios from 'axios';
 import ProductPageLoader from '../Loaders/ProductPageLoader';
 import ProductPageLeftPanel from '../components/ProductPageLeftPanel';
 import GoBackLink from '../components/GoBackLink';
+import InlineMessage from '../components/InlineMessage';
 import { baseUrl } from '../constants';
 import '../styles/productpage.css';
-
-const InlineMessage = lazy(() => import('../components/InlineMessage'));
 
 const Product = () => {
 
@@ -84,12 +83,10 @@ const Product = () => {
             }
             {
                 hasError &&
-                <Suspense fallback={<div>Loading...</div>}>
-                    <InlineMessage
-                        type={'error'}
-                        message={'Failed to load the product info'}
-                    />
-                </Suspense>
+                <InlineMessage
+                    type={'error'}
+                    message={'Failed to load the product info'}
+                />
             }
             {
                 productInfo &&

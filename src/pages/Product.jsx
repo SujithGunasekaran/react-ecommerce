@@ -1,12 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaPlus, FaMinus } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import ProductPageLoader from '../Loaders/ProductPageLoader';
 import ProductPageLeftPanel from '../components/ProductPageLeftPanel';
 import GoBackLink from '../components/GoBackLink';
 import InlineMessage from '../components/InlineMessage';
+import QuantityInput from '../components/QuantityInput';
 import { baseUrl } from '../constants';
 import '../styles/productpage.css';
 
@@ -136,23 +136,12 @@ const Product = () => {
                                     }
                                 </div>
                             </div>
-                            <div className='product-page-quantity-wrapper'>
-                                <div className='icon' onClick={descreaseQuantity}>
-                                    <FaMinus />
-                                </div>
-                                <input
-                                    type='number'
-                                    name='quantity'
-                                    value={productQuantity}
-                                    max={50}
-                                    min={1}
-                                    className='input'
-                                    onChange={handleProductQuantity}
-                                />
-                                <div className='icon' onClick={increaseQuantity}>
-                                    <FaPlus />
-                                </div>
-                            </div>
+                            <QuantityInput
+                                quantityValue={productQuantity}
+                                increaseQuantity={increaseQuantity}
+                                descreaseQuantity={descreaseQuantity}
+                                handleQuantityChange={handleProductQuantity}
+                            />
                             <button className='product-page-add-to-cart'>Add to Cart</button>
                         </div>
                     </div>

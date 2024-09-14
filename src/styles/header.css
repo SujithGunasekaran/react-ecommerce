@@ -6,8 +6,61 @@
     border-bottom: 1px solid var(--rec-border);
 }
 
-.header-title {
+.header-title a {
     color: var(--rec-text-color-5);
+    text-decoration: none;
+}
+
+.header-right-panel {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.header-right-panel .cart-link {
+    padding: 10px 10px;
+    position: relative;
+}
+
+.header-right-panel .cart-link .cart-count {
+    position: absolute;
+    color: var(--rec-text-dark-1);
+    top: -5px;
+    right: 5px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 1px 3px;
+    font-size: 13px;
+    background-color: var(--rec-highlight);
+}
+
+
+.header-right-panel .cart-link a .icon {
+    color: var(--rec-text-color-5);
+    text-decoration: none;
+    width: 25px;
+    height: 25px;
+    transition: 0.3s all ease-in-out;
+}
+
+.header-right-panel .cart-link a .icon:hover {
+    color: var(--rec-highlight);
+}
+
+.header-right-panel .github-link {
+    padding: 10px 10px;
+}
+
+.header-right-panel .github-link a .icon {
+    color: var(--rec-text-color-5);
+    text-decoration: none;
+    width: 25px;
+    height: 25px;
+    transition: 0.3s all ease-in-out;
+}
+
+.header-right-panel .github-link a .icon:hover {
+    color: var(--rec-highlight);
 }
 
 .header-link {

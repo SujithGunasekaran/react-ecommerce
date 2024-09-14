@@ -11,30 +11,11 @@
 
 .home-category-container {
     width: 240px;
-    height: 100%;
+    height: auto;
     border-right: 1px solid var(--rec-border);
 }
 
 .home-product-container {
     margin-top: 25px;
     flex: 1;
-}
-
-.home-footer {
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.load-more-btn {
-    display: block;
-    margin: 0px auto;
-    border: none;
-    font-size: 16px;
-    letter-spacing: 0.3px;
-    font-weight: 600;
-    color: var(--rec-text-color-5);
-    border-radius: 6px;
-    padding: 10px 15px;
-    cursor: pointer;
-    background-color: var(--rec-highlight-2);
 }

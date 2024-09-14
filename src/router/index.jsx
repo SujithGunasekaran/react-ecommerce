@@ -1,8 +1,11 @@
+import { lazy, Suspense } from 'react';
 import HeaderLayout from '../layouts/HeaderLayout';
 import Home from '../pages/Home';
 import Category from '../pages/Category';
 import Product from '../pages/Product';
 import { createBrowserRouter } from 'react-router-dom';
+
+const Cart = lazy(() => import('../pages/Cart'));
 
 const router = createBrowserRouter([
     {
@@ -11,20 +14,22 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: (
-                    <Home />
-                )
+                element: <Home />
             },
             {
                 path: '/category/:categoryName',
-                element: (
-                    <Category />
-                )
+                element: <Category />
             },
             {
                 path: '/product/:productId',
+                element: <Product />
+            },
+            {
+                path: '/cart',
                 element: (
-                    <Product />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Cart />
+                    </Suspense>
                 )
             }
         ]

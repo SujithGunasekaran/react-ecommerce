@@ -76,39 +76,37 @@ const Home = () => {
     }, [isLoading])
 
     return (
-        <>
-            <main className='home-container'>
-                <aside className='home-category-container'>
-                    <Categories />
-                </aside>
-                <section className='home-product-container'>
-                    <ProductSearchInput />
-                    {
-                        hasError &&
-                        <InlineMessage
-                            type={'error'}
-                            message={'Failed to load the products'}
-                        />
-                    }
-                    {
-                        productList.length > 0 &&
-                        <ProductCardList
-                            productList={productList}
-                        />
-                    }
-                    {
-                        isLoading &&
-                        <div className='product-list-container'>
-                            {
-                                getArrayWithNLength(12).map((_, index) => (
-                                    <ProductCardLoader key={index} />
-                                ))
-                            }
-                        </div>
-                    }
-                </section>
-            </main>
-        </>
+        <main className='home-container'>
+            <aside className='home-category-container'>
+                <Categories />
+            </aside>
+            <section className='home-product-container'>
+                <ProductSearchInput />
+                {
+                    hasError &&
+                    <InlineMessage
+                        type={'error'}
+                        message={'Failed to load the products'}
+                    />
+                }
+                {
+                    productList.length > 0 &&
+                    <ProductCardList
+                        productList={productList}
+                    />
+                }
+                {
+                    isLoading &&
+                    <div className='product-list-container'>
+                        {
+                            getArrayWithNLength(12).map((_, index) => (
+                                <ProductCardLoader key={index} />
+                            ))
+                        }
+                    </div>
+                }
+            </section>
+        </main>
     )
 }
 

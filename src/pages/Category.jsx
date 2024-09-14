@@ -9,7 +9,6 @@ import { getArrayWithNLength } from '../utils/loaderUtils.js';
 import ProductFilterLoader from '../Loaders/ProductFilterLoader.jsx';
 import ProductCardLoader from '../Loaders/ProductCardLoader.jsx';
 import ProductFilters from '../components/ProductFilters.jsx';
-import Categories from '../components/Categories';
 import ProductCardList from '../components/ProductCardList';
 import GoBackLink from '../components/GoBackLink';
 import InlineMessage from '../components/InlineMessage';
@@ -100,7 +99,6 @@ const Category = () => {
                             ))
                         }
                     </div>
-                    <Categories />
                 </section>
                 <section className='home-product-container'>
                     <GoBackLink

@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import LazyImage from './LazyImage';
+import { formatCurrency } from '../utils/commonUtils'
 
 const ProductCardItem = (props) => {
 
@@ -12,11 +13,8 @@ const ProductCardItem = (props) => {
     } = props;
 
     const price = useMemo(() => {
-        return product?.price ? new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(product.price) : 0;
-    }, [product])
+        return product.price ? formatCurrency(product.price, 'USD') : 0;
+    }, [product.price]);
 
     return (
         <>

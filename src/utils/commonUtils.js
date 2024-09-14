@@ -7,3 +7,10 @@ export const trottle = (callback, delay) => {
         callback();
     }
 }
+
+export const formatCurrency = (price, currencyCode) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: currencyCode,
+    }).format(price);
+}

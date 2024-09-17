@@ -17,6 +17,11 @@ const Header = () => {
                     </Link>
                     <p className='cart-count'>9+</p>
                 </div>
+                <div className='cart-link'>
+                    <Link to={'/login'}>
+                        Login
+                    </Link>
+                </div>
                 <div className='github-link'>
                     <a
                         href='https://github.com/SujithGunasekaran/react-ecommerce'

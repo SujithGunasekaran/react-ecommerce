@@ -1,12 +1,11 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaStar } from "react-icons/fa";
 import axios from 'axios';
 import ProductPageLoader from '../Loaders/ProductPageLoader';
-import ProductPageLeftPanel from '../components/ProductPageLeftPanel';
+import ProductPageLeftPanel from '../components/ProductPage/ProductPageLeftPanel';
+import ProductPageRightPanel from '../components/ProductPage/ProductPageRightPanel';
 import GoBackLink from '../components/GoBackLink';
 import InlineMessage from '../components/InlineMessage';
-import QuantityInput from '../components/QuantityInput';
 import { baseUrl } from '../constants';
 import '../styles/productpage.css';
 
@@ -50,16 +49,9 @@ const Product = () => {
         setProductQuantity((prevState) => prevState <= 50 ? prevState + 1 : prevState);
     }
 
-    const descreaseQuantity = () => {
+    const decreaseQuantity = () => {
         setProductQuantity((prevState) => prevState > 1 ? prevState - 1 : prevState);
     }
-
-    const price = useMemo(() => {
-        return productInfo?.price ? new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(productInfo.price) : 0;
-    }, [productInfo])
 
     useEffect(() => {
         if (!productId) return;
@@ -101,49 +93,20 @@ const Product = () => {
                         />
                     </div>
                     <div className='product-page-content-container'>
-                        <div className='product-page-content-wrapper'>
-                            <h1 className='product-page-content-title'>{productInfo.title}</h1>
-                            <div className='product-page-sub-header-wrapper'>
-                                <div className='sub-header-item'>
-                                    {productInfo.rating}
-                                    <span className='icon'><FaStar /></span>
-                                </div>
-                                <div className='sub-header-item'>
-                                    {productInfo.stock > 0 ? 'In-Stock' : 'Out-Of-Stock'}
-                                </div>
-                            </div>
-                            <p className='product-page-content-description'>{productInfo.description}</p>
-                            <div className='product-page-price-wrapper'>
-                                <p className='title'>Price</p>
-                                <h2 className='value'>
-                                    {price}
-                                    <span className='discount'>{productInfo.discountPercentage}%</span>
-                                </h2>
-                            </div>
-                            <div className='product-page-price-wrapper'>
-                                <p className='title'>Brand</p>
-                                <h2 className='value'>
-                                    {productInfo.brand}
-                                </h2>
-                            </div>
-                            <div className='product-page-tag-wrapper'>
-                                <p className='title'>Tags</p>
-                                <div className='tag-wrapper'>
-                                    {
-                                        productInfo.tags.map((tag) => (
-                                            <div key={tag} className='tag'>{tag}</div>
-                                        ))
-                                    }
-                                </div>
-                            </div>
-                            <QuantityInput
-                                quantityValue={productQuantity}
-                                increaseQuantity={increaseQuantity}
-                                descreaseQuantity={descreaseQuantity}
-                                handleQuantityChange={handleProductQuantity}
-                            />
-                            <button className='product-page-add-to-cart'>Add to Cart</button>
-                        </div>
+                        <ProductPageRightPanel
+                            title={productInfo.title}
+                            rating={productInfo.rating}
+                            stock={productInfo.stock}
+                            description={productInfo.description}
+                            price={productInfo.price}
+                            discountPercentage={productInfo.discountPercentage}
+                            brand={productInfo.brand}
+                            tags={productInfo.tags}
+                            quantityValue={productQuantity}
+                            increaseQuantity={increaseQuantity}
+                            decreaseQuantity={decreaseQuantity}
+                            handleQuantityChange={handleProductQuantity}
+                        />
                     </div>
                 </div>
             }

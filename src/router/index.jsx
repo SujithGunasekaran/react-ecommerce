@@ -5,6 +5,7 @@ import Category from '../pages/Category';
 import Product from '../pages/Product';
 import { createBrowserRouter } from 'react-router-dom';
 
+const Login = lazy(() => import('../pages/Login'));
 const Cart = lazy(() => import('../pages/Cart'));
 
 const router = createBrowserRouter([
@@ -15,6 +16,14 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: '/login',
+                element: (
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Login />
+                    </Suspense>
+                )
             },
             {
                 path: '/category/:categoryName',

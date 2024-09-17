@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import LazyImage from './LazyImage';
+import LazyImage from '../LazyImage';
 import propTypes from 'prop-types';
 
 const ProductPageLeftPanel = (props) => {

@@ -16,12 +16,14 @@ const HeaderLayout = () => {
 
     useEffect(() => {
         authenticateUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         if (isUserLoggedIn) {
             fetchUserCart();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isUserLoggedIn])
 
     return (

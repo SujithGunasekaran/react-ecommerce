@@ -1,9 +1,26 @@
-import { Link } from 'react-router-dom';
-import { FaGithub } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import { IoMdCart } from "react-icons/io";
 import '../styles/header.css';
 
 const Header = () => {
+
+    // navigate
+    const navigate = useNavigate();
+
+    // selector
+    const { userCartCount } = useSelector((store) => store.cart);
+
+    const { userToken, resetUserAndCart } = useAuth();
+
+    const goToLoginPage = () => {
+        navigate('/login');
+    }
+
+    const logOutUser = () => {
+        resetUserAndCart();
+    }
 
     return (
         <header className='header-container'>
@@ -15,23 +32,23 @@ const Header = () => {
                     <Link to={'/cart'}>
                         <IoMdCart className='icon' />
                     </Link>
-                    <p className='cart-count'>9+</p>
+                    <p className='cart-count'>{userCartCount}</p>
                 </div>
-                <div className='cart-link'>
-                    <Link to={'/login'}>
-                        Login
-                    </Link>
-                </div>
-                <div className='github-link'>
-                    <a
-                        href='https://github.com/SujithGunasekaran/react-ecommerce'
-                        target="_blank"
-                        rel="noreference"
-                        aria-label="github link"
-                    >
-                        <FaGithub className='icon' />
-                    </a>
-                </div>
+                {
+                    !userToken ?
+                        <button
+                            className='header-auth-btn'
+                            onClick={goToLoginPage}
+                        >
+                            Login
+                        </button>
+                        : <button
+                            className='header-auth-btn'
+                            onClick={logOutUser}
+                        >
+                            Logout
+                        </button>
+                }
             </div>
         </header>
     )

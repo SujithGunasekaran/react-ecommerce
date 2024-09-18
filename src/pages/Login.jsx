@@ -1,13 +1,25 @@
 import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUserInfo, setIsUserLoggedIn } from '../store/slice/userSlice';
+import { loginFormErrorMessage, defaultErrorMessage } from '../constants';
+import InlineMessage from '../components/InlineMessage';
 import CircleLoader from '../Loaders/CircleLoader';
-import { loginFormErrorMessage } from '../constants';
-import '../styles/login.css';
 
 const Login = () => {
 
     // state
-    const [loginInput, setLoginInput] = useState({ email: '', password: '' });
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loginInput, setLoginInput] = useState({ username: '', password: '' });
     const [errorInput, setErrorInput] = useState({});
+
+    // dispatch
+    const dispatch = useDispatch();
+
+    // navigate
+    const navigate = useNavigate();
 
     const isValidForm = () => {
         let isValid = true;
@@ -44,11 +56,43 @@ const Login = () => {
         });
     }
 
-    const handleFormSubmit = (event) => {
+    const loginUser = async () => {
+        try {
+            setIsLoading(true);
+            const requestPayload = {
+                ...loginInput,
+                expiresInMins: 30,
+            }
+            const response = await axios.post('https://dummyjson.com/user/login',
+                JSON.stringify(requestPayload),
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+            if (response.data) {
+                sessionStorage.setItem('accessToken', response.data.token);
+                dispatch(setIsUserLoggedIn(true));
+                dispatch(setUserInfo(response.data));
+                navigate('/');
+            }
+
+        } catch (error) {
+            console.log('login api error', error);
+            const message = error?.response?.data?.message ?? defaultErrorMessage;
+            setErrorMessage(message);
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
         if (!isValidForm()) {
             return;
         }
+        loginUser()
     }
 
     return (
@@ -58,19 +102,26 @@ const Login = () => {
                 onSubmit={handleFormSubmit}
             >
                 <h2 className='login-form-title'>Login</h2>
+                {
+                    errorMessage &&
+                    <InlineMessage
+                        type='error'
+                        message={errorMessage}
+                    />
+                }
                 <div className='login-form-input-wrapper'>
-                    <label htmlFor='email' className='login-form-label'>Email</label>
+                    <label htmlFor='username' className='login-form-label'>UserName</label>
                     <input
                         type='text'
-                        name='email'
-                        id='email'
-                        placeholder='Enter Email Address'
-                        className={`login-form-input ${errorInput?.email && 'error'}`}
-                        value={loginInput.email}
+                        name='username'
+                        id='username'
+                        placeholder='Enter userName'
+                        className={`login-form-input ${errorInput?.username && 'error'}`}
+                        value={loginInput.userName}
                         onChange={handleInputChange}
                         onBlur={handleBlurInput}
                     />
-                    <p className='login-form-input-error'>{errorInput?.email}</p>
+                    <p className='login-form-input-error'>{errorInput?.username}</p>
                 </div>
 
                 <label htmlFor='password' className='login-form-label'>Password</label>
@@ -88,10 +139,12 @@ const Login = () => {
                 <button
                     type='submit'
                     className='login-submit-btn'
-                    disabled={false}
+                    disabled={isLoading}
                 >
-                    Login
-                    {/* <CircleLoader className='login-form-loader' /> */}
+                    {
+                        isLoading ? <CircleLoader className='login-form-loader' />
+                            : 'Login'
+                    }
                 </button>
             </form>
         </div>

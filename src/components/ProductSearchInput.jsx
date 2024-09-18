@@ -40,7 +40,6 @@ const ProductSearchInput = () => {
                 setSearchProducts(response.data.products);
             }
         } catch (error) {
-            console.log('error - 1', error);
             if (error.message !== 'canceled') {
                 console.log('search product api error', error);
             }

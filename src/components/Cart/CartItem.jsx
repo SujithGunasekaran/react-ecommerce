@@ -11,6 +11,7 @@ const CartItem = (props) => {
         thumbnail,
         title,
         price,
+        quantity,
         discountPercentage
     } = props;
 
@@ -40,7 +41,7 @@ const CartItem = (props) => {
                     <div className='cart-footer-wrapper'>
                         <QuantityInput
                             className='cart-page-quantity-wrapper'
-                            quantityValue={1}
+                            quantityValue={quantity}
                         />
                         <button className='cart-delete-btn'>
                             <MdDeleteOutline className='icon' />
@@ -55,6 +56,7 @@ const CartItem = (props) => {
 CartItem.propTypes = {
     thumbnail: propTypes.string,
     title: propTypes.string,
+    quantity: propTypes.number,
     price: propTypes.number,
     discountPercentage: propTypes.number,
 };

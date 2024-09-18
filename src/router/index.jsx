@@ -5,6 +5,8 @@ import Category from '../pages/Category';
 import Product from '../pages/Product';
 import { createBrowserRouter } from 'react-router-dom';
 
+const LoginProtect = lazy(() => import('../pages/LoginProtect'));
+const ProtectedRoute = lazy(() => import('../pages/ProtectedRoute'));
 const Login = lazy(() => import('../pages/Login'));
 const Cart = lazy(() => import('../pages/Cart'));
 
@@ -21,7 +23,9 @@ const router = createBrowserRouter([
                 path: '/login',
                 element: (
                     <Suspense fallback={<div>Loading...</div>}>
-                        <Login />
+                        <LoginProtect>
+                            <Login />
+                        </LoginProtect>
                     </Suspense>
                 )
             },
@@ -37,7 +41,9 @@ const router = createBrowserRouter([
                 path: '/cart',
                 element: (
                     <Suspense fallback={<div>Loading...</div>}>
-                        <Cart />
+                        <ProtectedRoute navigateTo={'/login'}>
+                            <Cart />
+                        </ProtectedRoute>
                     </Suspense>
                 )
             }

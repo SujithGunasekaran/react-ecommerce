@@ -47,6 +47,5 @@ export const filterProductList = (selectedFilters, products) => {
     const { brand = [], rating = [] } = selectedFilters;
     const brandFilteredData = brand.length > 0 ? filterByBrand(products, brand) : products;
     const ratingFilteredData = rating.length > 0 ? filterByRating(brandFilteredData, rating) : brandFilteredData;
-    console.log(ratingFilteredData);
     return ratingFilteredData;
 }

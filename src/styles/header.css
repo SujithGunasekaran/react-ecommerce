@@ -18,28 +18,35 @@
 }
 
 .header-right-panel .cart-link {
-    padding: 10px 10px;
+    padding: 0px 15px;
     position: relative;
 }
 
 .header-right-panel .cart-link .cart-count {
     position: absolute;
     color: var(--rec-text-dark-1);
-    top: -5px;
+    top: -10px;
     right: 5px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 50%;
-    padding: 1px 3px;
-    font-size: 13px;
+    width: 23px;
+    height: 23px;
+    font-size: 12px;
     background-color: var(--rec-highlight);
 }
 
+.header-right-panel .cart-link a {
+    width: 30px;
+    height: 30px;
+}
 
 .header-right-panel .cart-link a .icon {
     color: var(--rec-text-color-5);
     text-decoration: none;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     transition: 0.3s all ease-in-out;
 }
 
@@ -47,20 +54,14 @@
     color: var(--rec-highlight);
 }
 
-.header-right-panel .github-link {
+.header-auth-btn {
+    border-radius: 6px;
     padding: 10px 10px;
-}
-
-.header-right-panel .github-link a .icon {
-    color: var(--rec-text-color-5);
-    text-decoration: none;
-    width: 25px;
-    height: 25px;
-    transition: 0.3s all ease-in-out;
-}
-
-.header-right-panel .github-link a .icon:hover {
-    color: var(--rec-highlight);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--rec-text-dark-1);
+    background-color: var(--rec-highlight);
 }
 
 .header-link {

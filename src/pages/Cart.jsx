@@ -23,6 +23,10 @@ const Cart = () => {
         return formatCurrency(userCartInfo.discountedTotal, 'USD');
     }, [userCartInfo.discountedTotal])
 
+    const totalCartLength = useMemo(() => {
+        return userCartInfo?.products?.length ?? 0;
+    }, [userCartInfo.products])
+
     return (
         <main className='cart-container'>
             <div className='cart-header-nav-wrapper'>
@@ -33,6 +37,12 @@ const Cart = () => {
             </div>
             <div className='cart-content-wrapper'>
                 <div className='cart-list-container'>
+                    <h2 className='cart-list-title'>
+                        Shopping Carts
+                        <span className='sub-text'>
+                            {`(${totalCartLength} ${totalCartLength > 1 ? 'items' : 'item'})`}
+                        </span>
+                    </h2>
                     {
                         <CartList
                             carts={userCartInfo?.products ?? []}

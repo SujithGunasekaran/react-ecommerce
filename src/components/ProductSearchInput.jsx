@@ -122,7 +122,7 @@ const ProductSearchInput = () => {
                     placeholder='Search products...'
                     onChange={handleSearchQuery}
                     onKeyDown={handleKeyDown}
-                    onBlur={resetData}
+                // onBlur={resetData}
                 />
                 {
                     isLoading &&

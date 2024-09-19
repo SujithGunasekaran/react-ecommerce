@@ -1,17 +1,17 @@
 :root {
   font-family: "Open Sans", sans-serif;
-  --rec-background: #222222;
-  --rec-background-2: rgba(74, 73, 73, 0.2);
-  --rec-background-3: rgb(90, 89, 89);
-  --rec-skeleton-background: #2e2d2d;
-  --rec-skeleton-loader: rgba(108, 108, 108, 0.2);
-  --rec-text-dark-1: #222222;
-  --rec-text-dark-2: rgb(153 153 153);
-  --rec-text-color-5: #FFFFFF;
-  --rec-text-color-4: #dfdfdf;
-  --rec-highlight: rgb(109, 237, 212);
-  --rec-highlight-2: rgb(84, 193, 171);
-  --rec-border: rgb(53, 52, 52);
+  --rec-background: white;
+  --rec-background-2: #EFF2F1;
+  --rec-skeleton-background: #c2c0c0;
+  --rec-skeleton-loader: rgba(168, 165, 165, 0.2);
+  --rec-text-dark-1: #fdfcfc;
+  --rec-text-dark-2: rgb(103, 101, 101);
+  --rec-text-color-5: #222222;
+  --rec-text-color-4: #363535;
+  --rec-text-color-3: rgb(130, 129, 129);
+  --rec-highlight: #3B5D50;
+  --rec-highlight-2: #3B5D50;
+  --rec-border: rgb(210, 209, 209);
   --rec-border-light: rgb(61, 61, 61);
 
   --rec-btn-disable: rgb(111, 110, 110);
@@ -48,7 +48,6 @@ body {
   padding: 8px 8px;
   width: 90px;
   border-radius: 50px;
-  border: 1px solid var(--rec-border);
   text-decoration: none;
   color: var(--rec-text-color-5);
   background-color: var(--rec-background-2);

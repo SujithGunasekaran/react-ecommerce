@@ -101,7 +101,8 @@ const Login = () => {
                 className='login-form-wrapper'
                 onSubmit={handleFormSubmit}
             >
-                <h2 className='login-form-title'>Login</h2>
+                <h2 className='login-form-title'>Welcome Back</h2>
+                <p className='login-form-sub-title'>Please login to your account</p>
                 {
                     errorMessage &&
                     <InlineMessage

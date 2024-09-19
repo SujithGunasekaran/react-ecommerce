@@ -30,7 +30,7 @@ const ProductPageLoader = (props) => {
             </div>
             <div className='product-page-content-container'>
                 <div className='product-page-content-wrapper'>
-                    <SkeletonLoader className={'product-page-content-title'} />
+                    <SkeletonLoader className={'product-page-content-title-loader'} />
                     <div className='product-page-sub-header-wrapper'>
                         <SkeletonLoader className={'sub-header-item-loader'} />
                         <SkeletonLoader className={'sub-header-item-loader'} />
@@ -57,7 +57,7 @@ const ProductPageLoader = (props) => {
                     <div className='product-page-quantity-wrapper-loader'>
                         <SkeletonLoader className={'quantity-loader'} />
                     </div>
-                    <SkeletonLoader className={'add-to-card-loader'} />
+                    <SkeletonLoader className={'product-page-add-to-card-loader'} />
                 </div>
             </div>
         </div>

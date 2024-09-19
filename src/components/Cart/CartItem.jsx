@@ -30,22 +30,25 @@ const CartItem = (props) => {
                     />
                 </div>
                 <div className='cart-item-content-wrapper'>
-                    <h2 className='title'>{title}</h2>
-                    <div className='cart-info-wrapper'>
-                        <p className='info-title'>Price</p>
-                        <p className='info-text'>
-                            {formatedPrice}
-                            <span className='discount'>{discountPercentage}% off</span>
-                        </p>
+                    <div className='cart-item-product-content-info'>
+                        <h3 className='title'>{title}</h3>
+                        <div className='cart-info-wrapper'>
+                            <p className='info-title'>Price</p>
+                            <p className='info-text'>
+                                {formatedPrice}
+                                <span className='discount'>{discountPercentage}% off</span>
+                            </p>
+                        </div>
+                        <div className='cart-delete-btn'>
+                            <MdDeleteOutline className='icon' />
+                            Delete
+                        </div>
                     </div>
-                    <div className='cart-footer-wrapper'>
+                    <div className='cart-right-panel-wrapper'>
                         <QuantityInput
                             className='cart-page-quantity-wrapper'
                             quantityValue={quantity}
                         />
-                        <button className='cart-delete-btn'>
-                            <MdDeleteOutline className='icon' />
-                        </button>
                     </div>
                 </div>
             </div>

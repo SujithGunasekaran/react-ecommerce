@@ -1,27 +1,14 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { formatCurrency } from '../utils/commonUtils';
 import CartList from '../components/Cart/CartList';
+import CartSummary from '../components/Cart/CartSummary';
 import GoBackLink from '../components/GoBackLink';
 import '../styles/cart.css';
-import { useMemo } from 'react';
 
 const Cart = () => {
 
     // selecttor
     const { userCartInfo } = useSelector((store) => store.cart);
-
-    const totalPrice = useMemo(() => {
-        return formatCurrency(userCartInfo.total, 'USD');
-    }, [userCartInfo.total]);
-
-    const discountPrice = useMemo(() => {
-        const discountTotal = userCartInfo.total - userCartInfo.discountedTotal;
-        return formatCurrency(discountTotal, 'USD');
-    }, [userCartInfo.total, userCartInfo.discountedTotal]);
-
-    const finalPrice = useMemo(() => {
-        return formatCurrency(userCartInfo.discountedTotal, 'USD');
-    }, [userCartInfo.discountedTotal])
 
     const totalCartLength = useMemo(() => {
         return userCartInfo?.products?.length ?? 0;
@@ -35,43 +22,28 @@ const Cart = () => {
                     to='/'
                 />
             </div>
+            <h2 className='cart-list-title'>
+                Shopping Carts
+                <span className='sub-text'>
+                    {`(${totalCartLength} ${totalCartLength > 1 ? 'items' : 'item'})`}
+                </span>
+            </h2>
             <div className='cart-content-wrapper'>
                 <div className='cart-list-container'>
-                    <h2 className='cart-list-title'>
-                        Shopping Carts
-                        <span className='sub-text'>
-                            {`(${totalCartLength} ${totalCartLength > 1 ? 'items' : 'item'})`}
-                        </span>
-                    </h2>
                     {
+                        totalCartLength > 0 &&
                         <CartList
                             carts={userCartInfo?.products ?? []}
                         />
                     }
                 </div>
                 <div className='cart-summary-container'>
-                    <h2 className='cart-summary-title'>Summary</h2>
-                    <div className='cart-summary-item-wrapper'>
-                        <div className='title'>Total Products</div>
-                        <div className='value'>{userCartInfo.totalProducts}</div>
-                    </div>
-                    <div className='cart-summary-item-wrapper'>
-                        <div className='title'>Total Quantity</div>
-                        <div className='value'>{userCartInfo.totalQuantity}</div>
-                    </div>
-                    <div className='cart-summary-item-wrapper'>
-                        <div className='title'>Sub Total</div>
-                        <div className='value'>{totalPrice}</div>
-                    </div>
-                    <div className='cart-summary-item-wrapper'>
-                        <div className='title'>Discount</div>
-                        <div className='value'>{discountPrice}</div>
-                    </div>
-                    <div className='cart-summary-border'></div>
-                    <div className='cart-summary-item-wrapper'>
-                        <div className='title'>Total</div>
-                        <div className='value'>{finalPrice}</div>
-                    </div>
+                    <CartSummary
+                        total={userCartInfo.total}
+                        totalProducts={userCartInfo.totalProducts}
+                        totalQuantity={userCartInfo.totalQuantity}
+                        discountedTotal={userCartInfo.discountedTotal}
+                    />
                 </div>
             </div>
         </main>

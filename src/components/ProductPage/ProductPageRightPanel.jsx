@@ -41,12 +41,15 @@ const ProductPageRightPanel = (props) => {
                     <span className='discount'>{discountPercentage}%</span>
                 </h2>
             </div>
-            <div className='product-page-price-wrapper'>
-                <p className='title'>Brand</p>
-                <h2 className='value'>
-                    {brand}
-                </h2>
-            </div>
+            {
+                brand &&
+                <div className='product-page-price-wrapper'>
+                    <p className='title'>Brand</p>
+                    <h2 className='value'>
+                        {brand}
+                    </h2>
+                </div>
+            }
             <div className='product-page-tag-wrapper'>
                 <p className='title'>Tags</p>
                 <div className='tag-wrapper'>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { resetUserCartInfo } from '../store/slice/cartSlice';
 import { setUserInfo, setIsUserLoggedIn, resetUserInfo } from '../store/slice/userSlice';
@@ -16,6 +16,9 @@ const useAuth = () => {
     // dispatch
     const dispatch = useDispatch();
 
+    // location
+    const location = useLocation();
+
     // token
     const token = sessionStorage.getItem('accessToken') || null;
 
@@ -27,7 +30,9 @@ const useAuth = () => {
         dispatch(resetUserCartInfo());
         setUserToken(null);
         sessionStorage.removeItem('accessToken');
-        navigate('/');
+        if (location.pathname === '/cart') {
+            navigate('/');
+        }
     }
 
     const authenticateUser = async () => {
@@ -48,9 +53,7 @@ const useAuth = () => {
             }
         } catch {
             setIsAuthenticated(false);
-            dispatch(resetUserInfo());
-            dispatch(resetUserCartInfo());
-            sessionStorage.removeItem('accessToken');
+            resetUserAndCart();
         } finally {
             setIsLoading(false);
         }

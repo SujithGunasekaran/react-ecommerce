@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { getArrayWithNLength } from '../utils/loaderUtils.js';
 import ProductCardLoader from '../Loaders/ProductCardLoader.jsx';
@@ -7,6 +8,7 @@ import Categories from '../components/Categories';
 import ProductCardList from '../components/ProductCardList';
 import InlineMessage from '../components/InlineMessage';
 import { baseUrl, productLimit } from '../constants';
+import { setProducts, setCurrentPage, setHasMoreProducts } from '../store/slice/productSlice.js';
 import { trottle } from '../utils/commonUtils';
 import '../styles/home.css';
 import '../styles/category.css';
@@ -16,11 +18,14 @@ import '../styles/product.css';
 const Home = () => {
 
     // state
-    const [productList, setProductList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
+
+    // dispatch
+    const dispatch = useDispatch();
+
+    // store
+    const { products, currentPage, hasMoreProduct } = useSelector((store) => store.product);
 
     const fetchProduct = async () => {
         try {
@@ -29,16 +34,10 @@ const Home = () => {
             const response = await axios.get(`${baseUrl}/products?limit=${productLimit}&skip=${skip}`);
             if (response.data) {
                 if (response.data.limit < productLimit) {
-                    setHasMore(false);
+                    dispatch(setHasMoreProducts(false));
                 }
-                setCurrentPage((prevState) => prevState + 1);
-                setProductList((prevState) => {
-                    let newState = [
-                        ...prevState,
-                        ...response.data.products
-                    ];
-                    return newState;
-                });
+                dispatch(setCurrentPage(currentPage + 1));
+                dispatch(setProducts(response.data.products));
             }
         } catch (error) {
             console.log('home page product api error', error);
@@ -57,13 +56,15 @@ const Home = () => {
 
         if (isLoading) return;
 
-        if (totalHeight - 500 < offset && hasMore) {
+        if (totalHeight - 500 < offset && hasMoreProduct) {
             fetchProduct();
         }
     }, 100)
 
     useEffect(() => {
-        fetchProduct();
+        if (products.length === 0) {
+            fetchProduct();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -90,9 +91,9 @@ const Home = () => {
                     />
                 }
                 {
-                    productList.length > 0 &&
+                    products.length > 0 &&
                     <ProductCardList
-                        productList={productList}
+                        productList={products}
                     />
                 }
                 {

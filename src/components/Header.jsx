@@ -32,7 +32,7 @@ const Header = () => {
                     <Link to={'/cart'}>
                         <IoMdCart className='icon' />
                     </Link>
-                    <p className='cart-count'>{userCartCount}</p>
+                    <p className='cart-count'>{userCartCount > 9 ? '9+' : userCartCount}</p>
                 </div>
                 {
                     !userToken ?

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import ProductPageLoader from '../Loaders/ProductPageLoader';
 import ProductPageLeftPanel from '../components/ProductPage/ProductPageLeftPanel';
@@ -16,10 +17,11 @@ const Product = () => {
 
     // state
     const [productInfo, setProductInfo] = useState(null);
-    const [productQuantity, setProductQuantity] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
-    const [activeImage, setActiveImage] = useState(0);
+
+    // selector
+    const { userCarts } = useSelector((store) => store.cart);
 
     const fetchProduct = async () => {
         try {
@@ -36,28 +38,18 @@ const Product = () => {
         }
     }
 
-    const handleImageChange = (index) => {
-        setActiveImage(index);
-    }
-
-    const handleProductQuantity = (event) => {
-        const { value = 1 } = event.target;
-        setProductQuantity(Number(value));
-    }
-
-    const increaseQuantity = () => {
-        setProductQuantity((prevState) => prevState <= 50 ? prevState + 1 : prevState);
-    }
-
-    const decreaseQuantity = () => {
-        setProductQuantity((prevState) => prevState > 1 ? prevState - 1 : prevState);
-    }
-
     useEffect(() => {
         if (!productId) return;
         fetchProduct();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productId])
+
+    const isProductInCart = useMemo(() => {
+        if (userCarts.length > 0) {
+            return userCarts?.some((product) => product.id === +productId);
+        }
+        return false;
+    }, [productId, userCarts])
 
 
     if (!productInfo && !isLoading && !hasError) {
@@ -88,24 +80,21 @@ const Product = () => {
                             title={productInfo.title}
                             images={productInfo.images}
                             thumbnail={productInfo.thumbnail}
-                            activeImage={activeImage}
-                            handleImageChange={handleImageChange}
                         />
                     </div>
                     <div className='product-page-content-container'>
                         <ProductPageRightPanel
+                            id={productInfo.id}
                             title={productInfo.title}
                             rating={productInfo.rating}
                             stock={productInfo.stock}
+                            thumbnail={productInfo.thumbnail}
                             description={productInfo.description}
                             price={productInfo.price}
                             discountPercentage={productInfo.discountPercentage}
                             brand={productInfo.brand}
                             tags={productInfo.tags}
-                            quantityValue={productQuantity}
-                            increaseQuantity={increaseQuantity}
-                            decreaseQuantity={decreaseQuantity}
-                            handleQuantityChange={handleProductQuantity}
+                            isProductInCart={isProductInCart}
                         />
                     </div>
                 </div>

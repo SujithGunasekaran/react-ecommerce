@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { addUserCartInfo } from '../store/slice/cartSlice';
+import { addUserCartInfo, setLoading, setHasError } from '../store/slice/cartSlice';
 
 const useCart = () => {
 
@@ -11,29 +10,23 @@ const useCart = () => {
     // dispatch
     const dispatch = useDispatch();
 
-    // state
-    const [isLoading, setIsLoading] = useState(false);
-    const [hasError, setHasError] = useState(false);
-
     const fetchUserCart = async () => {
         try {
-            setIsLoading(true);
+            dispatch(setLoading(true));
             const { id } = userInfo;
             const response = await axios.get(`https://dummyjson.com/carts/user/${id}`);
             if (response.data) {
-                dispatch(addUserCartInfo(response.data.carts[0]));
+                dispatch(addUserCartInfo(response.data.carts?.[0]?.products ?? []));
             }
         } catch (error) {
             console.log('cart api error', error);
-            setHasError(true);
+            dispatch(setHasError(true));
         } finally {
-            setIsLoading(false);
+            dispatch(setLoading(false));
         }
     }
 
     return {
-        isLoading,
-        hasError,
         fetchUserCart,
     }
 

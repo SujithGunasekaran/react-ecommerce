@@ -77,6 +77,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
+    text-decoration: none;
     padding-bottom: 15px;
     margin-bottom: 20px;
     border-bottom: 1px solid var(--rec-border);
@@ -93,9 +94,22 @@
     background-color: var(--rec-background-2);
 }
 
+
 .cart-item-image-wrapper .image {
     width: 120px;
     height: 120px;
+}
+
+.cart-item-image-wrapper.loader {
+    padding: 0px;
+    border-radius: 6px;
+    background-color: var(--rec-skeleton-background);
+}
+
+.cart-item-image-wrapper .image.loader {
+    width: 150px;
+    height: 150px;
+    border-radius: 6px;
 }
 
 .cart-item-content-wrapper {
@@ -107,7 +121,21 @@
 
 .cart-item-content-wrapper .title {
     font-size: 18px;
+    text-decoration: none;
     color: var(--rec-text-color-5);
+}
+
+.cart-item-content-wrapper .title a {
+    text-decoration: none;
+    color: var(--rec-text-color-5);
+}
+
+.cart-item-content-wrapper .title.loader,
+.cart-item-content-wrapper .cart-info-wrapper .info-title.loader,
+.cart-item-content-wrapper .cart-info-wrapper .info-text.loader {
+    height: 25px;
+    width: 200px;
+    border-radius: 6px;
 }
 
 .cart-item-content-wrapper .cart-info-wrapper {
@@ -155,6 +183,13 @@
     background-color: var(--rec-background-2);
 }
 
+.cart-delete-btn.loader {
+    width: 200px;
+    height: 45px;
+    border-radius: 6px;
+    background-color: var(--rec-skeleton-background);
+}
+
 .cart-delete-btn:hover {
     background-color: var(--rec-highlight);
     color: var(--rec-text-dark-1);
@@ -182,6 +217,12 @@
     border: 1px solid var(--rec-border);
 }
 
+.cart-page-quantity-wrapper.loader {
+    width: 200px;
+    height: 50px;
+    border-radius: 6px;
+}
+
 .cart-page-quantity-wrapper .icon {
     cursor: pointer;
     color: var(--rec-text-color-4);
@@ -203,4 +244,27 @@
 
 .cart-page-quantity-wrapper .input:focus {
     outline: none;
+}
+
+.empty-cart-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 50vh;
+}
+
+.empty-cart-wrapper .title {
+    color: var(--rec-text-color-5);
+}
+
+.empty-cart-wrapper a {
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--rec-text-dark-1);
+    background-color: var(--rec-highlight);
 }

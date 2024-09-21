@@ -72,7 +72,7 @@ const Login = () => {
                 }
             );
             if (response.data) {
-                sessionStorage.setItem('accessToken', response.data.token);
+                sessionStorage.setItem('accessToken', response.data.accessToken);
                 dispatch(setIsUserLoggedIn(true));
                 dispatch(setUserInfo(response.data));
                 navigate('/');

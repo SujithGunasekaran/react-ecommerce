@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import LazyImage from '../LazyImage';
 import propTypes from 'prop-types';
 
@@ -8,9 +8,14 @@ const ProductPageLeftPanel = (props) => {
     const {
         title,
         images,
-        activeImage,
-        handleImageChange
     } = props;
+
+    // state
+    const [activeImage, setActiveImage] = useState(0);
+
+    const handleImageChange = (index) => {
+        setActiveImage(index);
+    }
 
     return (
         <Fragment>
@@ -46,8 +51,6 @@ const ProductPageLeftPanel = (props) => {
 ProductPageLeftPanel.propTypes = {
     title: propTypes.string,
     images: propTypes.array,
-    activeImage: propTypes.number,
-    handleImageChange: propTypes.func,
 }
 
 export default ProductPageLeftPanel;

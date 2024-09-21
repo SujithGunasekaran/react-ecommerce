@@ -7,25 +7,24 @@ const QuantityInput = (props) => {
     const {
         className,
         quantityValue,
-        handleQuantityChange,
-        descreaseQuantity,
-        increaseQuantity
+        updateProductQuantity,
     } = props;
+
+    const descreaseQuantity = () => {
+        const updatedQuantity = quantityValue > 1 ? quantityValue - 1 : quantityValue;
+        updateProductQuantity(updatedQuantity);
+    }
+
+    const increaseQuantity = () => {
+        updateProductQuantity(quantityValue + 1);
+    }
 
     return (
         <div className={`quantity-wrapper ${className}`}>
             <div className='icon' onClick={descreaseQuantity}>
                 <FaMinus />
             </div>
-            <input
-                type='number'
-                name='quantity'
-                value={quantityValue}
-                max={50}
-                min={1}
-                className='input'
-                onChange={handleQuantityChange}
-            />
+            <div className='input'>{quantityValue}</div>
             <div className='icon' onClick={increaseQuantity}>
                 <FaPlus />
             </div>
@@ -36,9 +35,7 @@ const QuantityInput = (props) => {
 QuantityInput.propTypes = {
     className: propTypes.string,
     quantityValue: propTypes.number,
-    handleQuantityChange: propTypes.func,
-    descreaseQuantity: propTypes.func,
-    increaseQuantity: propTypes.func,
+    updateProductQuantity: propTypes.func,
 };
 
 export default QuantityInput;

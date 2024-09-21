@@ -2,8 +2,8 @@
   font-family: "Open Sans", sans-serif;
   --rec-background: white;
   --rec-background-2: #EFF2F1;
-  --rec-skeleton-background: #c2c0c0;
-  --rec-skeleton-loader: rgba(168, 165, 165, 0.2);
+  --rec-skeleton-background: #cbcbcb;
+  --rec-skeleton-loader: rgba(141, 139, 139, 0.2);
   --rec-text-dark-1: #fdfcfc;
   --rec-text-dark-2: rgb(103, 101, 101);
   --rec-text-color-5: #222222;

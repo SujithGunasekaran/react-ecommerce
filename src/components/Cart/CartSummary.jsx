@@ -6,35 +6,42 @@ const CartSummary = (props) => {
 
     // props
     const {
-        totalProducts,
-        totalQuantity,
-        total,
-        discountedTotal,
+        carts
     } = props;
 
     const totalPrice = useMemo(() => {
+        let total = carts.length === 0 ? 0 :
+            carts.reduce((curr, acc) => curr + acc.total, 0);
         return formatCurrency(total, 'USD');
-    }, [total]);
+    }, [carts]);
+
+    const toalQuantity = useMemo(() => {
+        return carts.length === 0 ? 0 :
+            carts.reduce((curr, acc) => curr + acc.quantity, 0);
+    }, [carts]);
 
     const formatedDiscountPrice = useMemo(() => {
-        const discountTotal = total - discountedTotal;
-        return formatCurrency(discountTotal, 'USD');
-    }, [total, discountedTotal]);
+        let total = carts.length === 0 ? 0 :
+            carts.reduce((curr, acc) => curr + (acc.total - acc.discountedTotal), 0);
+        return formatCurrency(total, 'USD');
+    }, [carts]);
 
     const formatedFinalPrice = useMemo(() => {
-        return formatCurrency(discountedTotal, 'USD');
-    }, [discountedTotal])
+        let total = carts.length === 0 ? 0 :
+            carts.reduce((curr, acc) => curr + acc.discountedTotal, 0);
+        return formatCurrency(total, 'USD');
+    }, [carts])
 
     return (
         <>
             <h2 className='cart-summary-title'>Summary</h2>
             <div className='cart-summary-item-wrapper'>
                 <div className='title'>Total Products</div>
-                <div className='value'>{totalProducts}</div>
+                <div className='value'>{carts.length}</div>
             </div>
             <div className='cart-summary-item-wrapper'>
                 <div className='title'>Total Quantity</div>
-                <div className='value'>{totalQuantity}</div>
+                <div className='value'>{toalQuantity}</div>
             </div>
             <div className='cart-summary-item-wrapper'>
                 <div className='title'>Sub Total</div>
@@ -54,10 +61,7 @@ const CartSummary = (props) => {
 }
 
 CartSummary.propTypes = {
-    totalProducts: propTypes.number,
-    totalQuantity: propTypes.number,
-    total: propTypes.number,
-    discountedTotal: propTypes.number,
+    carts: propTypes.array,
 }
 
 export default CartSummary;

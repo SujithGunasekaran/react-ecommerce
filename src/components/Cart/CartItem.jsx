@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { MdDeleteOutline } from "react-icons/md";
 import QuantityInput from '../QuantityInput';
@@ -8,16 +9,23 @@ const CartItem = (props) => {
 
     // props
     const {
+        id,
         thumbnail,
         title,
         price,
         quantity,
-        discountPercentage
+        discountPercentage,
+        removeCart,
+        updateQuantity,
     } = props;
 
     const formatedPrice = useMemo(() => {
         return formatCurrency(price, 'USD');
     }, [price]);
+
+    const updateProductQuantity = (quantity) => {
+        updateQuantity(id, quantity);
+    }
 
     return (
         <>
@@ -31,7 +39,9 @@ const CartItem = (props) => {
                 </div>
                 <div className='cart-item-content-wrapper'>
                     <div className='cart-item-product-content-info'>
-                        <h3 className='title'>{title}</h3>
+                        <h3 className='title'>
+                            <Link to={`/product/${id}`}>{title}</Link>
+                        </h3>
                         <div className='cart-info-wrapper'>
                             <p className='info-title'>Price</p>
                             <p className='info-text'>
@@ -39,7 +49,7 @@ const CartItem = (props) => {
                                 <span className='discount'>{discountPercentage}% off</span>
                             </p>
                         </div>
-                        <div className='cart-delete-btn'>
+                        <div className='cart-delete-btn' onClick={() => removeCart(id)}>
                             <MdDeleteOutline className='icon' />
                             Delete
                         </div>
@@ -48,6 +58,7 @@ const CartItem = (props) => {
                         <QuantityInput
                             className='cart-page-quantity-wrapper'
                             quantityValue={quantity}
+                            updateProductQuantity={updateProductQuantity}
                         />
                     </div>
                 </div>
@@ -57,11 +68,14 @@ const CartItem = (props) => {
 }
 
 CartItem.propTypes = {
+    id: propTypes.number,
     thumbnail: propTypes.string,
     title: propTypes.string,
     quantity: propTypes.number,
     price: propTypes.number,
     discountPercentage: propTypes.number,
+    removeCart: propTypes.func,
+    updateQuantity: propTypes.func,
 };
 
 export default CartItem;

@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { MdDeleteOutline } from "react-icons/md";
+import LazyImage from '../LazyImage';
 import QuantityInput from '../QuantityInput';
 import { formatCurrency } from '../../utils/commonUtils';
 
@@ -31,7 +32,7 @@ const CartItem = (props) => {
         <>
             <div className='cart-item-wrapper'>
                 <div className='cart-item-image-wrapper'>
-                    <img
+                    <LazyImage
                         src={thumbnail}
                         alt={title}
                         className='image'

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CircleLoader from '../Loaders/CircleLoader';
 import { FaSearch } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
 import { baseUrl } from '../constants';
 import axios from 'axios';
 import '../styles/search.css';
@@ -113,6 +113,7 @@ const ProductSearchInput = () => {
     return (
         <div className='search-wrapper'>
             <div className='search-input-wrapper'>
+                <div className='search-icon'><FaSearch className='icon' /></div>
                 <input
                     id='search-input'
                     type='text'
@@ -136,10 +137,9 @@ const ProductSearchInput = () => {
                         className='search-cancel'
                         onClick={resetData}
                     >
-                        <MdCancel className='icon' />
+                        <MdOutlineCancel className='icon' />
                     </div>
                 }
-                <div className='search-icon'><FaSearch className='icon' /></div>
             </div>
             {
                 searchedProducts.length > 0 &&

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { FaStar } from "react-icons/fa";
@@ -27,6 +27,9 @@ const ProductPageRightPanel = (props) => {
     // state
     const [productQuantity, setProductQuantity] = useState(1);
 
+    // store
+    const { isUserLoggedIn } = useSelector((store) => store.user);
+
     // navigate
     const navigate = useNavigate();
 
@@ -34,6 +37,10 @@ const ProductPageRightPanel = (props) => {
     const dispatch = useDispatch();
 
     const addToCart = () => {
+        if (!isUserLoggedIn) {
+            navigate('/login');
+            return;
+        }
         const totalPrice = price * productQuantity;
         const discountedTotal = Number((totalPrice - ((totalPrice * discountPercentage) / 100)).toFixed(2));
         const productInfo = {

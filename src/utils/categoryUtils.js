@@ -19,7 +19,7 @@ export const getRatings = () => {
     let ratings = [];
     for (let i = 5; i > 0; i--) {
         ratings.push({
-            displayName: `${i}+ Star ${i > 1 ? 'Ratings' : 'Rating'}`,
+            displayName: `${i} Star ${i > 1 ? 'Ratings' : 'Rating'}`,
             name: `${i}`
         })
     }

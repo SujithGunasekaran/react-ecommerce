@@ -1,12 +1,14 @@
+import { lazy, Suspense } from 'react';
 import HeaderLayout from '../layouts/HeaderLayout';
 import Home from '../pages/Home';
 import Category from '../pages/Category';
 import Product from '../pages/Product';
-import Login from '../pages/Login';
-import Cart from '../pages/Cart';
-import LoginProtect from '../pages/LoginProtect';
-import ProtectedRoute from '../pages/ProtectedRoute';
 import { createBrowserRouter } from 'react-router-dom';
+
+const LoginProtect = lazy(() => import('../pages/LoginProtect'));
+const Login = lazy(() => import('../pages/Login'));
+const ProtectedRoute = lazy(() => import('../pages/ProtectedRoute'));
+const Cart = lazy(() => import('../pages/Cart'));
 
 const router = createBrowserRouter([
     {
@@ -20,9 +22,11 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: (
-                    <LoginProtect>
-                        <Login />
-                    </LoginProtect>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <LoginProtect>
+                            <Login />
+                        </LoginProtect>
+                    </Suspense>
                 )
             },
             {
@@ -36,9 +40,12 @@ const router = createBrowserRouter([
             {
                 path: '/cart',
                 element: (
-                    <ProtectedRoute navigateTo={'/login'}>
-                        <Cart />
-                    </ProtectedRoute>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <ProtectedRoute navigateTo={'/login'}>
+                            <Cart />
+                        </ProtectedRoute>
+                    </Suspense>
+
                 )
             }
         ]

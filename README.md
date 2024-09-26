@@ -22,9 +22,3 @@
       > pnpm dev
 
 
-<h3>License</h3>
-
-<h4>This project is licensed under the MIT License</h4>
-
-  
-

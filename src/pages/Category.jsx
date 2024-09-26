@@ -92,12 +92,15 @@ const Category = () => {
                                 onCheckboxChange={selectFilters}
                             />
                         }
-                        {
-                            isLoading &&
-                            getArrayWithNLength(2).map((_, index) => (
-                                <ProductFilterLoader key={index} />
-                            ))
-                        }
+                        <div className='product-filter-loader'>
+                            {
+                                isLoading &&
+                                getArrayWithNLength(2).map((_, index) => (
+                                    <ProductFilterLoader key={index} />
+                                ))
+                            }
+                        </div>
+
                     </div>
                 </section>
                 <section className='home-product-container'>

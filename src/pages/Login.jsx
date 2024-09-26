@@ -95,6 +95,13 @@ const Login = () => {
         loginUser()
     }
 
+    const fillTestAccount = () => {
+        setLoginInput({
+            username: 'liamg',
+            password: 'liamgpass'
+        })
+    }
+
     return (
         <div className='login-container'>
             <form
@@ -118,7 +125,7 @@ const Login = () => {
                         id='username'
                         placeholder='Enter userName'
                         className={`login-form-input ${errorInput?.username && 'error'}`}
-                        value={loginInput.userName}
+                        value={loginInput.username}
                         onChange={handleInputChange}
                         onBlur={handleBlurInput}
                     />
@@ -146,6 +153,13 @@ const Login = () => {
                         isLoading ? <CircleLoader className='login-form-loader' />
                             : 'Login'
                     }
+                </button>
+                <button
+                    type='button'
+                    className='login-secondary-btn'
+                    onClick={fillTestAccount}
+                >
+                    Use Test Account
                 </button>
             </form>
         </div>

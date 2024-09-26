@@ -19,3 +19,21 @@
     margin-top: 25px;
     flex: 1;
 }
+
+@media screen and (max-width: 750px) {
+    .home-container {
+        padding: 0px;
+        display: block;
+    }
+
+    .home-product-container {
+        padding: 0px 10px;
+        margin-top: 5px;
+        margin-bottom: 45px;
+    }
+
+    .home-category-container {
+        width: 0px;
+        border: none;
+    }
+}

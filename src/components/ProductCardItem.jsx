@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import propTypes from 'prop-types';
 import { FaStar } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import LazyImage from './LazyImage';
+// import LazyImage from './LazyImage';
 import { formatCurrency } from '../utils/commonUtils'
 
 const ProductCardItem = (props) => {
@@ -20,10 +20,11 @@ const ProductCardItem = (props) => {
         <>
             <Link to={`/product/${product.id}`} className='product-card'>
                 <div className='product-card-header'>
-                    <LazyImage
+                    <img
                         className='product-img'
                         src={product.thumbnail}
                         alt={product.title}
+                        loading='lazy'
                     />
                 </div>
                 <div className='product-card-content'>

@@ -245,3 +245,47 @@
 .product-page-add-to-card-loader {
     border-radius: 6px;
 }
+
+@media screen and (max-width: 750px) {
+    .product-page-info-wrapper {
+        display: flex;
+        gap: 35px;
+        padding: 10px 0px 0px 0px;
+        flex-direction: column;
+    }
+
+    .product-page-image-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .product-page-main-image {
+        order: 1;
+    }
+
+    .product-page-image-list {
+        flex-direction: row;
+        order: 2;
+        min-width: 100%;
+        justify-content: center;
+        overflow-x: scroll;
+    }
+
+    .product-page-image-item,
+    .product-page-image-item .image,
+    .product-page-image-item .image-loader {
+        width: 120px;
+        height: 100px;
+    }
+
+    .product-page-content-container,
+    .product-page-content-wrapper {
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .product-page-main-image .image-loader {
+        width: 100%;
+        min-height: 350px;
+    }
+}

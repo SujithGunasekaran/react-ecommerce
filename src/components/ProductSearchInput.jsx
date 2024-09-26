@@ -50,7 +50,9 @@ const ProductSearchInput = () => {
 
     const handleKeyDown = (event) => {
         const { key } = event;
+        console.log('check - 1', event);
         if (searchedProducts.length === 0) return;
+
         if (key === 'Enter') {
             event.preventDefault();
             const { id } = searchedProducts[activeList];
@@ -81,7 +83,11 @@ const ProductSearchInput = () => {
         }
     }
 
-    const resetData = () => {
+    const resetData = (event) => {
+        if (listRef.current && listRef.current.contains(event.relatedTarget)) {
+            console.log('inside');
+            return;
+        }
         setSearchQuery('');
         setSearchProducts([]);
         setActiveList(-1);
@@ -123,7 +129,7 @@ const ProductSearchInput = () => {
                     placeholder='Search products...'
                     onChange={handleSearchQuery}
                     onKeyDown={handleKeyDown}
-                // onBlur={resetData}
+                    onBlur={resetData}
                 />
                 {
                     isLoading &&

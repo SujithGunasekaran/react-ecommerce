@@ -268,3 +268,30 @@
     color: var(--rec-text-dark-1);
     background-color: var(--rec-highlight);
 }
+
+@media screen and (max-width: 750px) {
+    .cart-content-wrapper {
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .cart-list-container {
+        padding: 0px;
+    }
+
+    .cart-list-container,
+    .cart-summary-container {
+        width: 100%;
+    }
+
+    .cart-item-wrapper,
+    .cart-item-content-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .cart-item-content-wrapper {
+        width: 100%;
+        align-items: flex-start;
+    }
+}
